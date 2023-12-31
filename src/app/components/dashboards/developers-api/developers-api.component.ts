@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DeveloperApiKeyService } from './developer-api-key.service';
+import { HttpStatusCode } from '@angular/common/http';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-developers-api',
@@ -6,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./developers-api.component.scss']
 })
 export class DevelopersApiComponent implements OnInit {
+  constructor(
+    public keyService:DeveloperApiKeyService,
+    private _sharedService:SharedService
+    )
+  {}
+  apiKey=null;
   products!:any[];
   errors!:any[];
+  keyGenerating = false;
   ngOnInit(): void {
     this.products = [
       {perameterName:'api_key', meaning:'API Key', description:'Your API Key ()'},
@@ -28,6 +38,40 @@ export class DevelopersApiComponent implements OnInit {
       {code:'1010', meaning:'Invalid User & Password'},
       {code:'1011', meaning:'Invalid User Id'},
     ];
+    this.GetKey();
+    
   }
-  
+  GetKey()
+  {
+    this.keyService.GetCurrentUserApiKey().subscribe((response:any)=>{
+      if(response.statusCode = HttpStatusCode.Accepted){
+        this.apiKey = response.value;
+      }
+    })
+  }
+  LoadKey() {
+    if (this.keyService.keyModified)
+      this.GetKey();
+    this.keyService.keyModified = false;
+  }
+  OngenerateClick(){
+    this.keyService.showModal = true;
+  }
+
+  GenerateButtonClicked(){
+    this.keyGenerating = true;
+    this.keyService.GenerateKey().subscribe((response:any)=>{
+      if(response.statusCode== HttpStatusCode.Accepted){
+        this.keyGenerating=false;
+        this.GetKey();
+        this.keyService.showModal = false;
+        this._sharedService.showSuccess(response.message,'key')
+      }
+      else{
+        this.keyGenerating=false;
+        this.GetKey();
+        this.keyService.showModal = false;
+      }
+    })
+  }
 }

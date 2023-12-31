@@ -142,11 +142,11 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/reporting/dlr_scheduled/upcoming']
                             },
                             
-                            // {
-                            //     label: 'DLR- API',
-                            //     icon: 'pi pi-table',
-                            //     routerLink: ['/developers']
-                            // },
+                            {
+                                label: 'DLR- API',
+                                icon: 'pi pi-table',
+                                routerLink: ['/developers']
+                            },
                             // {
                             //     label: 'DLR- Scheduled',
                             //     icon: 'pi pi-chart-pie',

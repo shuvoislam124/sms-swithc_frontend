@@ -3,9 +3,10 @@
     <p>Text SMS API</p>
     <div>
         <div style="display: flex; align-items: center;">
-            <p style="margin-top: .6rem; padding-right: 10px;">Your API key</p>
-            <button class="btn-type-1">Generate key</button>
+            <p style="margin-top: .6rem; padding-right: 10px;">Your API key:<span class="fw-bold" *ngIf="apiKey">{{apiKey.key}}</span></p>
+            <button (click)="OngenerateClick()" class="btn-type-1">{{apiKey?'Regenerate Key':'Generate Key'}}</button>
         </div>
+        
     </div> 
     <div class="flex">
         <div >
@@ -95,11 +96,19 @@
             <tr>
                 <td>{{ product.code }}</td>
                 <td>{{ product.meaning }}</td>
-                
-                
             </tr>
         </ng-template>
        
     </p-table>        
 </div>
 <button class="btn-type-1 text-center my-3" style="display: block; margin:auto;">Buy Credit</button>
+
+<p-dialog header="API Key" [position]="'top'" (onHide)="this.keyService.keyModified" [(visible)]="this.keyService.showModal" [style]="{width: '300px'}">
+    <p>
+        Are you sure you want to regenerate API Key? Old implementations of the API would not work unless you update newly generated API Key in those. Shall we proceed?
+    </p>
+    <div class="d-flex justify-content-between">
+        <button [disabled]="keyGenerating" (click)="GenerateButtonClicked()" class="btn btn-success">{{!keyGenerating?(apiKey?'Regenerate':'Generate'):'Generating'}}</button>
+        <button class="btn btn-danger ">Cancel</button>
+    </div>
+</p-dialog>
