@@ -1,0 +1,46 @@
+<div>
+    <form [formGroup]="_service.form" (ngSubmit)="onSubmit()" class="p-fluid">
+        <div class="field">
+            <label htmlfor="sms_campaign">Contact  Number</label>
+            <input pInputText formControlName="number" appNumericOnly [prepend88ToNewLines]="true" />
+            <input type="hidden" formControlName="id" >
+        </div>
+        <div class="field">
+            <label htmlfor="name"> Name</label>
+            <input pInputText formControlName="name"  />
+            
+        </div>
+        <div class="field">
+            <label htmlfor="email">Email</label>
+            <input pInputText type="email" formControlName="email"  />
+        </div>
+        <!-- <div class="field">
+            <label htmlfor="sms_campaign">Operator</label>
+            <input pInputText type="email" formControlName="operator"  />
+        </div> -->
+        <!-- <div class="field" bis_skin_checked="1">
+            <label htmlfor="name1">Group</label>
+            <span class="p-float-label">
+                <p-dropdown [options]="groups" formControlName="group" placeholder="select a group" optionLabel="name"  inputId="float-label"></p-dropdown>
+            </span>
+            
+        </div> -->
+        <div class="field">
+            <label htmlfor="group">Status</label>
+            <div class="flex flex-wrap gap-3">
+                <div class="flex align-items-center" *ngFor="let statusOption of statusOptions">
+                    <p-radioButton   [value]="statusOption.value" formControlName="isEnable" [inputId]="statusOption.name"></p-radioButton>
+                    <label for="ingredient1" class="ml-2">{{statusOption.name}}</label>
+                </div>
+            </div>  
+        </div>
+        <div class="flex justify-content-end">
+            <span class="mr-2">
+                <button (click)="onCancel()" pButton pRipple label="Cancel" class="p-button-danger"></button>
+            </span>
+            <span>
+                <button type="submit" [disabled]="_service.form.invalid" pButton pRipple label="{{this.inProgress? 'Please Wait': this._service.form.get('id').value? 'Update':'Add'}}" class="p-button-primary"></button>
+            </span>
+        </div>
+    </form>
+</div>

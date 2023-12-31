@@ -1,0 +1,83 @@
+<div >
+    <div class="card">
+        
+        <p-table #dt1
+        [lazy]="true"
+        (onLazyLoad)="this.dateFilterForm.valid?GetAll($event,this.startDate, this.endDate):GetAll($event)"
+        [value]="list" [tableStyle]="{'min-width': '60rem'}"
+        [paginator]="true"
+        [rows]="itemsPerPage"
+        [totalRecords]="totalRecords"
+        [showCurrentPageReport]="true"
+        [loading]="loding"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10, 20, 30, 50, 100]"
+        paginatorLocale="fa-IR"
+        >
+            <ng-template pTemplate="caption">
+                <form [formGroup]="dateFilterForm" (ngSubmit)="onSubmitDateFilterForm()"  class="flex" style="justify-content: space-between;">
+                    <div class="flex" style="align-items: center;">
+                        
+                        <div>From  <p-calendar  formControlName="startDate"   [showIcon]="true"></p-calendar> 
+                            
+                        </div>
+                        <div>
+                            To   <p-calendar  formControlName="endDate"   [showIcon]="true"></p-calendar>
+                        </div>
+                        <button type="submit" pButton pRipple label="Submit" class="p-button-success"></button>
+                        
+                    </div>
+                    <div class="flex">
+                        <span class="p-input-icon-left p-ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text"  (input)="dt1.filterGlobal(getVal($event), 'contains')"
+                              placeholder="Search keyword" />
+                          </span>
+                    </div>
+
+                </form>
+            </ng-template>
+            <ng-template pTemplate="header" >
+                <tr>
+                    <th pSortableColumn="code" >Serial<p-sortIcon field="code"></p-sortIcon></th>
+                    <th pSortableColumn="code" >Client Id<p-sortIcon field="code"></p-sortIcon></th>
+                    <th pSortableColumn="number" >Client Name<p-sortIcon field="number"></p-sortIcon></th>
+                    <th pSortableColumn="category">Company Name<p-sortIcon field="category"></p-sortIcon></th>
+                    <th pSortableColumn="quantity" >Panel SMS<p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="price" >API SMS<p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="price" >Schedule Up<p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="price" >Schedule Sent<p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="dlrCode" >Total SMS<p-sortIcon field="dlrCode"></p-sortIcon></th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{item.clientId}}</td>
+                    <td>{{item.clientName}}</td>
+                    <td>{{item.companyName}}</td>
+                    
+                    <td ><div class="flex justify-content-between">{{item.panelSmsTotal}} <a class="pi pi-arrow-circle-right fw-bold "></a><a (click)="downloadReport(item.clientId,'Panel',this.startDate,this.endDate,item.clientName+'_'+item.clientId)" class="pi  fw-bold pi-download"></a></div></td>
+                    <td ><div class="flex justify-content-between">{{item.apiSmsTotal}} <a class="pi pi-arrow-circle-right fw-bold "></a><a (click)="downloadReport(item.clientId,'API',this.startDate,this.endDate,item.clientName+'_'+item.clientId)" class="pi  fw-bold pi-download"></a></div></td>
+                    
+                    
+                    <td>{{item.scheduleUp}}</td>
+                    <td>{{item.scheduleSent}}</td>
+                    <td>{{item.totalSms}}</td>
+                    <!-- <td>{{item.s}}</td> -->
+                    
+                </tr>
+            </ng-template>
+        </p-table>
+        <ng-template #noRecords>
+            <h1 >No Records Found</h1>
+        </ng-template>
+        
+    </div>
+    
+</div>
+<ng-template #loading>
+    <h1>Loading......</h1>
+</ng-template>

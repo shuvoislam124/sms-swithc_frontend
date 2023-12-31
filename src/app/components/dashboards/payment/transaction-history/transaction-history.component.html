@@ -1,0 +1,44 @@
+<p *ngIf="UserTransactions?.length !=0 else no_trx" class="text-center text-lg fw-bold">Transaction History</p>
+<ng-template #no_trx>
+    <p class="text-center text-lg fw-bold">You have no transactions now.</p>
+  </ng-template>
+<div>
+    <div class="card" *ngIf="UserTransactions?.length !=0">
+        
+        <p-table  [value]="UserTransactions" [tableStyle]="{'min-width': '60rem'}"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        paginatorLocale="fa-IR"
+        
+        >
+            
+            <ng-template pTemplate="header">
+                <tr>
+                    <!-- <th pSortableColumn="code" style="width:20%">Serial<p-sortIcon field="code"></p-sortIcon></th> -->
+                    <th pSortableColumn="code" style="width:20%">Date<p-sortIcon field="code"></p-sortIcon></th>
+                    <th pSortableColumn="name" style="width:20%">Payment Method<p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="category" style="width:20%">Transaction Id<p-sortIcon field="category"></p-sortIcon></th>
+                    <th pSortableColumn="quantity" style="width:20%">Recharge Amoun<p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="price" style="width:20%">Commulative Balance<p-sortIcon field="price"></p-sortIcon></th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-transaction>
+                <tr>
+                    <!-- <td>{{totalTrx-1}}</td> -->
+                    <td>{{transaction.createdAt | date}}</td>
+                    <td>{{transaction.paymentMethod}}</td>
+                    <td>{{transaction.transactionId}}</td>
+                    <td>{{transaction.amount}}</td>
+                    <td>{{transaction.newBalance | currency: 'USD'}}</td>
+                    
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    
+</div>

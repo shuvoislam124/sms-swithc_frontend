@@ -1,0 +1,68 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: 75% 25%;
+    gap:0px 25px;
+}
+.send-later-calender-div{
+    width: 40%;
+}
+@media(max-width:1250px){
+    
+    .send-later-calender-div{
+        width: 45%;
+    }
+}
+@media(max-width:750px){
+    .send-later-calender-div{
+        width: 100%;
+    }
+    .grid-container{
+        display: grid;
+        grid-template-columns: 100%;
+        gap:0px 25px;
+    }
+    .flex-gap > div:not(:first-child) {
+        margin-left: 16px;
+      }
+}
+.flex-gap {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+  
+.flex-gap > div:not(:first-child) {
+margin-left: 16px;
+}
+.shallow-red-bg-card{
+    background-color: #fbe1e3 !important;
+    color: #e73d4a !important;
+}
+.flex{
+    display: flex;
+}
+.fw-bold{
+    font-weight: bold;
+}
+.align-items-center{
+    align-items: center;
+}
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: none;
+    display: inline-block;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.custom-file-upload:hover{
+    background-color: blue;
+    color: white;
+    
+}
+.form-tabs .p-tabmenu-ink-bar{
+    display: none!important;
+}

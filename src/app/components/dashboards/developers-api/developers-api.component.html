@@ -1,0 +1,105 @@
+<h3>Developers API</h3>
+<div class="card">
+    <p>Text SMS API</p>
+    <div>
+        <div style="display: flex; align-items: center;">
+            <p style="margin-top: .6rem; padding-right: 10px;">Your API key</p>
+            <button class="btn-type-1">Generate key</button>
+        </div>
+    </div> 
+    <div class="flex">
+        <div >
+            <span class="fw-bold" >JSON data format:</span>
+            <span class="link-text-orange">One to many</span>
+            |
+            <span class="link-text-orange" style="padding-right: 10px;">Many to many</span>
+        </div>
+        <div>
+            <span class="fw-bold">PHP Surce code:</span>
+            <span class="link-text-orange">One to many</span>
+            |
+            <span class="link-text-orange">Many to many</span>
+        </div>
+    </div>
+    <div style="background-color: #e0ebf9; color: #327ad5; margin-top: 10px;">
+        <p style="padding:25px 10px;"><span class="fw-bold">API URL (GET & POST): </span><span> http://202.164.208.226/smsapi?api_key=(APIKEY)&type=text&contacts=(NUMBER)&senderid=(Approved Sender ID)&msg=(Message Content)</span></p>
+    </div>
+    <div style="margin-top: 10px;">
+        <p-table [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
+           
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>{{ product.perameterName }}</td>
+                    <td>{{ product.meaning }}</td>
+                    <td>{{ product.description}}</td>
+                    
+                </tr>
+            </ng-template>
+           
+        </p-table>        
+    </div>
+</div>
+<div style="margin-top:30px">
+    <p>Credit Balance API</p>
+    <div style="background-color: #e0ebf9; ">
+        <div style="padding: 25px 10px;">
+            <p><span class="fw-bold">API URL :</span> <span>http://202.164.208.226/miscapi/(API Key )/getBalance</span></p>
+            <p><span class="fw-bold">API URL :</span> <span>Your API Key ()</span></p>
+        </div>
+    </div>
+</div>
+<div style="margin-top:30px">
+    <p>Delivery Report API</p>
+    <div style="background-color: #e0ebf9; ">
+        <div style="padding: 25px 10px;">
+            <p><span class="fw-bold">API URL :</span> <span> http://202.164.208.226/miscapi/(API Key )/getDLR/getAll</span></p>
+            <p><span class="fw-bold">API URL :</span> <span>Your API Key ()</span></p>
+            <p><span class="fw-bold">Chunk per Call :</span> <span>100</span></p>
+            <p><span class="fw-bold">SMS Shoot ID : </span> <span> Enter the SMS ID returned when submitted SMS via API. It will return an array having mobile numbers and their DLR status.</span></p>
+            <p><span class="fw-bold">API URL :  </span> <span> http://202.164.208.226/miscapi/(API Key )/getDLR/(SMS SHOOT ID)</span></p>
+        </div>
+    </div>
+</div>
+<div style="margin-top:30px">
+    <p>API Key Retrieval</p>
+    <div style="background-color: #e0ebf9; ">
+        <div style="padding: 25px 10px;">
+            <p><span class="fw-bold">API URL :</span> <span> http://202.164.208.226/getkey/(username)/( password)</span></p>
+            <p><span class="fw-bold">Username :</span> <span>Your account User ID used to login.</span></p>
+            <p><span class="fw-bold">Password  :</span> <span>Account password that you use to login.</span></p>
+            
+        </div>
+    </div>
+</div>
+<div style="margin-top: 30px;">
+    <p>Error Code & Meaning</p>
+    <p-table [value]="errors" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
+       
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Code</th>
+                <th>Meaning</th>
+    
+                
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{ product.code }}</td>
+                <td>{{ product.meaning }}</td>
+                
+                
+            </tr>
+        </ng-template>
+       
+    </p-table>        
+</div>
+<button class="btn-type-1 text-center my-3" style="display: block; margin:auto;">Buy Credit</button>

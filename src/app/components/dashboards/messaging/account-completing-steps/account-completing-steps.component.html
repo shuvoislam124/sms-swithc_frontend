@@ -1,0 +1,260 @@
+<p-dialog header="Alert On UnSave Change" [(visible)]="isVisibleSaveDialog" [modal]="true" [style]="{ width: 'fit-content'}" [draggable]="false" [resizable]="false">
+    <div>
+        <p>Are You ready to leave the page without saving?</p>
+        <div style="display: flex; justify-content: space-between; width:80%;">
+            <button (click)="save()" class="btn-type-1">Leave</button>
+        </div>
+        <!-- <button pButton type="button"  label="Yes"></button>
+        <button pButton type="button" (click)="cancel()" label="No"></button> -->
+    </div>
+</p-dialog>
+<!-- <p-dialog header="Fill up all the necessary field" [(visible)]="isVisibleSaveDialog" [modal]="true" [style]="{ width: 'fit-content'}" [draggable]="false" [resizable]="false">
+    <div>
+        <p>Fill Up all the necessary field</p>
+        <div style="display: flex; justify-content: space-between; width:80%;">
+            <button (click)="save()" class="btn-type-1">Ok</button>
+        </div>
+    </div>
+</p-dialog> -->
+
+<h3>Your Account is not complete Yet. Complete Your Profile for using messaging features.</h3>
+<div class="card form-tabs">
+    <p-toast></p-toast>
+    <p-tabMenu [scrollable]="true" [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
+    <div *ngIf="activeItem == items[0]">
+        <form class="p-fluid" [formGroup]="peronalInformationFG" (ngSubmit)="onSubmitForms($event)">
+            <div class="field">
+                <label htmlfor="name1">Full Name</label>
+                <input type="text" pInputText formControlName="fullName"   />
+            </div>
+            <label class="error-label" *ngIf="(this.peronalInformationFG.get('fullName')?.hasError('required')) &&(this.peronalInformationFG.get('fullName')?.touched)"
+                        >
+                        The Name Field is required
+                </label>
+            <div class="field">
+                <label htmlfor="name1">Email</label>
+                <input type="text" pInputText formControlName="email"  />
+                <label class="error-label" *ngIf="(this.peronalInformationFG.get('email')?.hasError('required')) && (this.peronalInformationFG.get('email')?.touched)">
+                    The email field is required
+                </label>
+                <label class="error-label" *ngIf="(this.peronalInformationFG.get('email')?.hasError('email')) && (this.peronalInformationFG.get('email')?.touched)">
+                    Please Enter a valid Email
+                </label>
+            </div>
+            
+            <br>
+            <button (click)="onActiveItemChangeByIndex(1)" class="btn-type-1">Next</button>
+        </form>
+    </div>
+    <div *ngIf="activeItem == items[1]">
+        <form class="p-fluid" [formGroup]="nIDInformationFG" (ngSubmit)="onSubmitForms($event)">
+            <div class="field">
+                <label htmlfor="name">Name</label>
+                <input type="text" pInputText formControlName="name" />
+                <label class="error-label" *ngIf="(this.nIDInformationFG.get('name')?.hasError('required')) && (this.nIDInformationFG.get('name')?.touched)">
+                    The name field is required
+                </label>
+            </div>
+            
+            <div class="field">
+                <label htmlfor="name1">Fathers Name</label>
+                <input type="text" pInputText formControlName="fathersName" />
+                <label class="error-label" *ngIf="(this.nIDInformationFG.get('fathersName')?.hasError('required')) && (this.nIDInformationFG.get('fathersName')?.touched)">
+                    Fathers Name field is required
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name">Mothers Name</label>
+                <input type="text" pInputText formControlName="mothersName"/>
+                <label class="error-label" *ngIf="(this.nIDInformationFG.get('mothersName')?.hasError('required')) && (this.nIDInformationFG.get('mothersName')?.touched)">
+                    Mothers Name field is required
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name1">NID Number</label>
+                <input type="text" pInputText formControlName="nidNumber" />
+                <label class="error-label" *ngIf="(this.nIDInformationFG.get('nidNumber')?.hasError('required')) && (this.nIDInformationFG.get('nidNumber')?.touched)">
+                    NID field is required
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name1">DOB</label>
+                <input type="date" pInputText formControlName="dob" />
+                <label class="error-label" *ngIf="(this.nIDInformationFG.get('dob')?.hasError('required')) && (this.nIDInformationFG.get('dob')?.touched)">
+                    Date of Birth Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name1">Address</label>
+                <input type="text" pInputText formControlName="address"  />
+                <label class="error-label" *ngIf="(this.nIDInformationFG.get('address')?.hasError('required')) && (this.nIDInformationFG.get('address')?.touched)">
+                    Address Field is required 
+                </label>
+            </div>
+            <!-- <div class="field">
+                <label htmlfor="name1">NID Upload (Front Part ) Max 500 KB</label>
+                <input  type="file" id="nidFrontPart" name="nidFrontPart"  />
+                <input  type="text" formControlName="nidFrontPart" />
+            </div> -->
+            <div class="field">
+                <p-toast></p-toast>
+                <!-- <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onNIDBackPartUpload($event)"></p-fileUpload> -->
+            </div>
+            <!-- <div class="field">
+                <label htmlfor="name1">NID Upload (Back Part ) Max 500 KB</label>
+                <input type="file" id="nidBackPart" name="nidBackPart"   (change)="onFileSelected($event, 'nidBackPart')"/>
+                
+            </div> -->
+            <div class="field"> 
+                <div class="field" bis_skin_checked="1">
+                    <label htmlfor="filedata">NID Upload (Front Part ) Max 500 KB </label>
+                    <br>
+                    <label class="custom-file-upload">
+                        <input type="file" id="nidFrontPart" name="nidFrontPart"  (change)="onFileSelected($event, 'nidFrontPart')" />
+                        {{ nIDInformationFG.value?.nidFrontPart?.name || 'Choose NiD Frot Part' }} <i class="pi pi-file-import
+                        "></i>
+                        
+                    </label>
+                    <br>
+                    <label class="error-label" *ngIf="(this.nIDInformationFG.get('nidFrontPart')?.hasError('size'))">
+                        {{this.nIDInformationFG.get('nidFrontPart').getError('size')}}
+                    </label>
+                    <br>  
+                    <label class="error-label" *ngIf="(this.nIDInformationFG.get('nidFrontPart')?.hasError('type'))">
+                        {{this.nIDInformationFG.get('nidFrontPart').getError('type')}}
+                    </label>
+                </div>
+            </div>
+            <div class="field"> 
+                <div class="field" bis_skin_checked="1">
+                    <label htmlfor="nidBackPart">NID Upload (Back Part ) Max 500 KB </label>
+                    <br>
+                    <label class="custom-file-upload">
+                        <input type="file" id="nidBackPart" name="nidBackPart"  (change)="onFileSelected($event, 'nidBackPart')" />
+                        {{ nIDInformationFG.value?.nidBackPart?.name || 'Choose NiD Back Part' }} <i class="pi pi-file-import
+                        "></i>
+                        
+                    </label>
+                    <br>
+                    <label class="error-label" *ngIf="(this.nIDInformationFG.get('nidBackPart')?.hasError('size'))">
+                        {{this.nIDInformationFG.get('nidBackPart').getError('size')}}
+                    </label>
+                    <br>  
+                    <label class="error-label" *ngIf="(this.nIDInformationFG.get('nidBackPart')?.hasError('type'))">
+                        {{this.nIDInformationFG.get('nidBackPart').getError('type')}}
+                    </label>
+                    <br>  
+                </div>
+            </div>
+            <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Next</button>
+            <button  (click)="onActiveItemChangeByIndex(0)" style="margin-right: 10px;" class="btn-type-1">Previous</button>
+        </form>
+    </div>
+    
+    <div *ngIf="activeItem == items[2]" >
+        <h5><p-checkbox [(ngModel)]="isSkipApiApproval" [binary]="true" name="isSkipApiApproval" inputId="binary"></p-checkbox> I want to skip the section</h5>
+        <form class="p-fluid" *ngIf="!isSkipApiApproval" [formGroup]="userApiApprovalFG" (ngSubmit)="onSubmitForms($event)">
+            
+            <div class="field">
+                <label htmlfor="name">Company Name</label>
+                <input type="text"  pInputText formControlName="companyName"  />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyName')?.hasError('required')) && (this.userApiApprovalFG.get('companyName')?.touched)">
+                    Comapany Name Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name1">Company Email</label>
+                <input  pInputText formControlName="companyEmail" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyEmail')?.hasError('required')) && (this.userApiApprovalFG.get('companyEmail')?.touched)">
+                    Comapany Email Field is required 
+                </label>
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyEmail')?.hasError('email')) && (this.userApiApprovalFG.get('companyEmail')?.touched)">
+                    Enter a valid email
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name">Company Contact Person Name </label>
+                <input  pInputText formControlName="companyContactPersonName" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPersonName')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPersonName')?.touched)">
+                    Comapany Contact Person Name Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name">Company Contact Person Phone Number </label>
+                <input  pInputText formControlName="companyContactPersonPhoneNumber" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPersonPhoneNumber')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPersonPhoneNumber')?.touched)">
+                    Comapany Contact Person Phone Number Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name">Company Contact  Number </label>
+                <input  pInputText formControlName="companyContactPhoneNumber" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPhoneNumber')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPhoneNumber')?.touched)">
+                    Comapany Contact Number  Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="companyWebSiteUrl">Website URL</label>
+                <input  pInputText formControlName="companyWebSiteUrl" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyWebSiteUrl')?.hasError('required')) && (this.userApiApprovalFG.get('companyWebSiteUrl')?.touched)">
+                    Comapany Website Url Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name1">Application URL</label>
+                <input  pInputText formControlName="applicationUrl"/>
+            </div>
+            
+            <div class="field">
+                <label htmlfor="name1">Tread License Number</label>
+                <input  pInputText formControlName="treadLicenceseNumber"/>
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('treadLicenceseNumber')?.hasError('required')) && (this.userApiApprovalFG.get('treadLicenceseNumber')?.touched)">
+                    trade License Number Field is required 
+                </label>
+            </div>
+            <div class="field">
+                
+                <div class="field" bis_skin_checked="1">
+                    <label htmlfor="filedata">Tread License Upload  </label>
+                    <br>
+                    <label class="custom-file-upload">
+                        <input type="file" id="treadLicense" name="treadLicense"  (change)="onFileSelectedInuserApiApprovalFG($event, 'treadLicense')" />
+                        {{ userApiApprovalFG.value?.treadLicense?.name || 'Choose Your License' }} <i class="pi pi-file-import
+                        "></i>
+                        
+                    </label>
+                    <br>
+                    <br>
+                    <label class="error-label" *ngIf="(this.userApiApprovalFG.get('treadLicense')?.hasError('size'))">
+                        {{this.userApiApprovalFG.get('treadLicense').getError('size')}}
+                    </label>
+                    <br>  
+                    <label class="error-label" *ngIf="(this.userApiApprovalFG.get('treadLicense')?.hasError('type'))">
+                        {{this.userApiApprovalFG.get('treadLicense').getError('type')}}
+                    </label>
+                    <br>  
+                    
+                </div>
+            </div>
+            
+            <button   (click)="onActiveItemChangeByIndex(3)" style="margin-right: 10px;" class="btn-type-1">Next</button>
+            <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Previous</button>
+        </form>
+        <div *ngIf="isSkipApiApproval">
+            <button  (click)="onActiveItemChangeByIndex(3)" style="margin-right: 10px;" class="btn-type-1">Next</button>
+            <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Previous</button>
+        </div>
+    </div>
+    <div *ngIf="activeItem == items[3]" style="margin-top: 200px;">
+        <div style="width: fit-content; margin: auto;">
+            <p *ngIf="this.peronalInformationFG.invalid || this.nIDInformationFG.invalid" style="color: red; font-size: 20px;"> You need to fill up all the necessary field first to submit</p>
+           <form>
+            <h5><p-checkbox [disabled]="this.peronalInformationFG.invalid || this.nIDInformationFG.invalid" [(ngModel)]="agreeToSubmit" [binary]="true" inputId="binary" name="fullName"></p-checkbox>I am Agree to submit All my Information</h5>
+           </form>
+            <div style="width: fit-content; margin: auto;">
+                <!-- <button  [disabled]="!agreeToSubmit || this.peronalInformationFG.invalid || this.nIDInformationFG.invalid" (click)="onSumbit()" class="btn-type-1">{{submitWorking? 'Please Wait':'Submit'}}</button> -->
+                <button [disabled]="inProgress ||(this.peronalInformationFG.invalid || this.nIDInformationFG.invalid)" (click)="onSumbit()"  label="{{inProgress? 'Please Wait':'Submit'}}" type="submit" pButton pRipple class="w-full" label="Submit"></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="containerClass">
+    <div class="grid-container" style="width: 100%; ">
+        <div style="margin-bottom: 30px;">
+            <div class="card">
+                    <p-tabView>
+                        <p-tabPanel header="SMS Recipient">
+                            <form [formGroup]="smsRecipientTabform" (ngSubmit)="smsRecipientTabformOnSubmit()">
+                            <div class=" p-fluid" bis_skin_checked="1">
+                                <div class="field" bis_skin_checked="1">
+                                    <label htmlfor="name1">Select Sender Id</label>
+                                    <span class="p-float-label">
+                                        <p-dropdown [options]="senderIds" formControlName="senderId" placeholder="select Sender Id" optionLabel="number" value="senderId.number" inputId="float-label"></p-dropdown>
+                                    </span>
+                                    <!-- <div class="text-danger" *ngIf="smsRecipientTabform.get('recipients').hasError('appNumberValidator')">
+                                        Invalid number format. Only digits are allowed.
+                                    </div> -->
+                                    <!-- <span> <a [routerLink]="'/messaging/senderid'">Request New Sender Id</a> </span> -->
+                                </div>
+                                <div class="field" bis_skin_checked="1">
+                                    <label htmlfor="mobile_numbers">Enter Mobile Numbers </label>
+                                    <textarea appNumericOnly [allowNewLine]="true" [prepend88ToNewLines]="true" id="mobile_numbers" rows="2" (input)="countTotalNumber()" cols="30" formControlName="recipients" placeholder="Your Message" pInputTextarea></textarea>
+                                    <div class="d-flex justify-content-between">
+                                        <span style="font-size: small;"> New Line separeted</span>
+                                        <span *ngIf="!smsRecipientTabform.get('recipients').hasError('appNumberValidator') && smsRecipientTabform.get('recipients').dirty" style="font-size: small;">Total <span class="text-info">{{smsRecipientTabformTotalNumbers}}</span> numbers</span>
+                                    </div>
+                                    <div class="text-danger" *ngIf="smsRecipientTabform.get('recipients').hasError('appNumberValidator')">
+                                        Invalid number format. Only digits are allowed.
+                                    </div>
+                                </div>
+                                <div class="field" bis_skin_checked="1">
+                                    <label htmlfor="sms_contents">Enter SMS Content </label>
+                                    <textarea formControlName="content" id="sms_contents" rows="2"  cols="30" placeholder="Your Message"  pInputTextarea></textarea>
+                                    <div class="character-counting-label" style="display: flex; justify-content: space-between;">
+                                        <p>Check Your SMS COUNT <span>Use Template</span></p>
+                                        <p><span class="text-info">{{messageCharacters}}</span> Characters | <span class="text-info">{{messageCharaterLeft}}</span> Characters Left| <span class="text-info">{{totalSms}}</span> SMS (<span class="text-info">{{totacharacterPerSMS}}</span> Char./SMS)</p>
+                                    </div>
+                                    
+                                </div>
+                                <div class="field" bis_skin_checked="1">
+                                    <label htmlfor="mobile_numbers">Select SMS Type</label>
+                                    <div class="grid formgrid">
+                                        <div class="col-12 flex-gap">
+                                            <div class="field-radiobutton">
+                                                <p-radioButton formControlName="smsType" value="text"  id="smsType1"></p-radioButton>
+                                                <label for="city1">Text</label>
+    
+                                            </div>
+                                            <div class="field-radiobutton">
+                                                <p-radioButton [disabled]="true" formControlName="smsType" value="unicode"  id="smsType2"></p-radioButton>
+                                                <label for="city2">Unicode</label>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="field" bis_skin_checked="1">
+                                    <label htmlfor="mobile_numbers">Schedule Message</label>
+                                    <div class="grid formgrid">
+                                        <div class="col-12 flex-gap">
+                                            <div class="field-radiobutton">
+                                                <p-radioButton formControlName="schedulingType" value="sendnow"  id="city1" ></p-radioButton>
+                                                <label for="city1">Send Now</label>
+                                            </div>
+                                            <div class="field-radiobutton">
+                                                <p-radioButton formControlName="schedulingType" value="sendlater"  id="city2" ></p-radioButton>
+                                                <label for="city2">Send Later</label>
+                                            </div> 
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div *ngIf="showCalander" class="field send-later-calender-div" bis_skin_checked="1">
+                                        <p-calendar formControlName="laterSendingDateTime"  [showIcon]="true"></p-calendar>
+                                    </div>
+                                    
+                                </div>
+                                <div class="field">
+                                    <label htmlfor="sms_campaign">Campaign Name </label>
+                                    <input pInputText formControlName="campaignName" />
+                                </div>
+                               
+                                <div style="width: fit-content">
+                                    <p-button [disabled]="smsRecipienTabFormWorking || smsRecipientTabform.invalid" type="submit" label="{{!smsRecipienTabFormWorking ? 'Process SMS':'Please wait'}}"></p-button>
+                                </div>
+
+                            </div>
+                            </form>
+                        </p-tabPanel>
+                        <p-tabPanel header="Group Contact">
+                            <app-group-contact-message></app-group-contact-message>
+                        </p-tabPanel>
+                          <p-tabPanel header="Upload File">
+                            <h3 class="text-center text-info">This Feature is coming soon</h3>
+                        </p-tabPanel>
+                        <p-tabPanel header="Dynamic SMS">
+                            <h3 class="text-center text-info">This Feature is coming soon</h3>
+                            <!-- <p>
+                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                                voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                                cupiditate non provident, similique sunt in culpa
+                                qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum
+                                facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                                cumque nihil impedit quo minus.
+                            </p> -->
+                        </p-tabPanel>
+    
+                    </p-tabView>
+                
+            </div>
+
+        </div>
+        <div class="">
+            <div class="card">
+                <p>Available Balance</p>
+                <hr>
+                <p>BDT <span class="fw-bold" *ngIf="availableBalance$ | async as balance; else loading">{{balance.value}}</span>
+                    <ng-template #loading>
+                        Loading...
+                    </ng-template>
+                </p>
+                <hr>
+                <p>Price Per SMS</p>
+            </div>
+            <div class="card shallow-red-bg-card">
+                <p>UNSUB</p>
+                <p>UAE Users please ensure that you put "UNSUB 3811 or OPTOUT 3811" at end of each SMS. As per TRA optout option is mandatory. We will not be responsible for any non delivery arising because of this.</p> 
+            </div>
+            <div class="card shallow-red-bg-card">
+                <p>SMS Content</p>
+                <p>* 160 Characters are counted as 1 SMS in case of English language & 70 in other language.</p> 
+                <p>* One simple text message containing extended GSM character set {{'(~^{}[]\|)'}} is 70 characters long. Check your SMS count before pushing SMS.</p>
+            </div>
+        </div>
+    </div>
+</div>

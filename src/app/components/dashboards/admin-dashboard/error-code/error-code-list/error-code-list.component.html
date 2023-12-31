@@ -1,0 +1,84 @@
+<p-table #dt1 [value]="list"
+         [lazy]="true" (onLazyLoad)="GetAll($event)"
+        dataKey="id" [tableStyle]="{'min-width': '75rem'}"
+        [paginator]="true" 
+        [rows]="4"
+        [totalRecords]="totalRecords"
+        [loading]="loading" 
+        [globalFilterFields]="['code']"
+        [rowsPerPageOptions]="[2,4,6]"
+        [lazy]="true"
+        (onLazyLoad)="GetAll($event)"
+    
+        [paginator]="true"
+        [totalRecords]="totalRecords"
+        [showCurrentPageReport]="true"
+
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10, 20, 30, 50, 100]"
+        paginatorLocale="fa-IR"
+        >
+      <ng-template pTemplate="caption">
+        <div  class="row" style="justify-content: space-between;">
+            
+            <div class="col-lg-6">
+                <div class="flex">
+                    <span class="p-input-icon-left p-ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text"  (input)="dt1.filterGlobal(getVal($event), 'contains')"
+                          placeholder="Search keyword" />
+                      </span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <p-button (click)="onCreate()"  icon="pi pi-plus" label="Add Error Code"></p-button>
+            </div>
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+
+        <tr>
+            <th class="text-center" style="width: 4rem">Serial</th>
+            <th class="text-center" pSortableColumn="name">Error Code <p-sortIcon field="name"></p-sortIcon></th>
+            <th class="text-center" >Display Code </th>
+            <th class="text-center" >Description</th>
+            <th class="text-center" >Retry</th>
+            <th class="text-center" >Swithc</th>
+            <th class="text-center" >Actions</th>
+        </tr>
+        
+    </ng-template>
+    <ng-template pTemplate="body" let-error let-i="rowIndex">
+        <tr>
+            <td class="text-center">{{i+1}}</td>
+            <td class="text-center">{{error.code}}</td>
+            <td class="text-center">{{error.displayCode}}</td>
+            <td class="text-center">{{error.description}}</td>
+
+            <td class="text-center" >
+                <p-badge [value]="'Yes'" *ngIf="error.retry" severity="success"></p-badge>
+                <p-badge [value]="'No'" *ngIf="!error.retry" severity="warning"></p-badge>
+            </td>
+            <td class="text-center">
+                <div class="flex justify-content-center">
+                    <p-selectButton severity="success" [options]="errorCodeStateOptions" [(ngModel)]="error.retry" optionLabel="label" optionValue="value"></p-selectButton>
+                </div>
+                
+            </td>
+            <td>
+                <div style="display:block; width:fit-content; margin:auto;">
+                    <div class="display:flex;">
+                    <button (click)="onEdit(error)" class="btn btn-primary rounded mx-1"><i class="pi pi-pencil"></i></button>
+                    <button (click)="onDelete(error.id)" class="btn btn-danger rounded mx-1"><i class="pi pi-trash"></i></button>
+                    <!-- <button class="btn btn-primary rounded mx-1"><i class="pi pi-download"></i></button> -->
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-dialog header="Header" [position]="'top'" (onHide)="LoadData()" [(visible)]="_service.displayModal" [style]="{width: '50vw'}">
+    <app-create-error-code></app-create-error-code>
+</p-dialog>

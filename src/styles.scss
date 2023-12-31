@@ -1,0 +1,85 @@
+/* You can add global styles to this file, and also import other style files */
+$gutter: 1rem; //for primeflex grid system
+
+/* Layout */
+@import "assets/layout/styles/layout/layout.scss";
+
+/* PrimeNG */
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primeicons/primeicons.css";
+
+/* Quill Text Editor for p-editor */
+@import "../node_modules/quill/dist/quill.core.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+
+/* Demos */
+@import "assets/demo/styles/flags/flags.css";
+@import "assets/demo/styles/badges.scss";
+@import "assets/demo/styles/code.scss";
+
+.link-text-orange{
+    cursor: pointer;
+    color: orangered;
+}
+//bootstrapian
+.fw-bold{
+    font-weight: bold;
+}
+.text-center{
+    text-align: center;
+}
+.my-3{
+    margin-top: 6rem;
+}
+.layout-topbar-end{
+    //background-color: white;
+}
+.btn-type-1{
+    padding: .6rem 1rem;
+    background-color: orangered;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.btn-type-1:disabled{
+    opacity:0.6;
+    cursor: not-allowed;
+}
+.error-label{
+    padding-bottom:10px;
+    color: darkred; 
+    text-align: left;
+    font-size: 1em;
+}
+.caption-subject {
+    font-size: 16px;
+}
+.font-dark {
+    color: #2f353b!important;
+}
+.uppercase {
+    text-transform: uppercase!important;
+}
+.bold {
+    font-weight: 700!important;
+}
+.caption-helper {
+    padding: 0;
+    margin: 0;
+    line-height: 13px;
+    color: #9eacb4;
+    font-size: 13px;
+    font-weight: 400;
+}
+.font-yellow-gold {
+    color: #ff8800!important;
+}
+.font-gray{
+    color: #9eacb4!important;
+}
+
+.font-green-jungle {
+    color: #26C281!important;
+}

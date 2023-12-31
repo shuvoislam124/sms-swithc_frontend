@@ -1,0 +1,71 @@
+<p-toast></p-toast>
+<p-dialog header="Login" [(visible)]="navigateToLoginModalShow" [modal]="true" [style]="{ width: 'fit-content'}" [draggable]="false" [resizable]="false">
+    <div>
+        <p>Your account has created successfully. Want to Login your account?</p>
+        <div style="display: flex; justify-content: space-between; width:80%;">
+            <button (click)="navigateToLogin()" class="btn-type-1">Login to Dashboard</button>
+        </div>
+        <!-- <button pButton type="button"  label="Yes"></button>
+        <button pButton type="button" (click)="cancel()" label="No"></button> -->
+    </div>
+</p-dialog>
+<div class="h-screen flex w-full surface-ground">
+    <form [formGroup]="form" (ngSubmit)="OnSubmit()" class="flex flex-1 flex-column surface-ground align-items-center justify-content-center">
+        <div class="w-11 sm:w-30rem">
+            <div class="flex flex-column">
+                <div style="height:56px; width:56px"
+                    class="bg-primary-50 border-circle flex align-items-center justify-content-center">
+                    <i class="pi pi-users text-primary text-4xl"></i>
+                </div>
+                <div class="mt-4">
+                    <h1 class="m-0 text-primary font-semibold text-4xl">
+                        Join us!
+                    </h1>
+                    <span class="block text-700 mt-2">Please fill the fields to sign-up MDL SMS Network</span>
+                </div>
+            </div>
+            <div class="flex flex-column gap-3 mt-6">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+                    <input type="tel" formControlName="phoneNumber" (keyup)="IfPhoneNumberExist()" type="text" pInputText placeholder="Phone Number"
+                    [ngClass]="(this.form.get('phoneNumber')?.hasError('required') && (this.form.get('phoneNumber')?.touched)) || (this.form.get('phoneNumber')?.hasError('exists') && (this.form.get('phoneNumber')?.touched))? 'ng-invalid ng-dirty':''"
+                    >
+                    
+                </div>
+                <label *ngIf="this.form.get('phoneNumber')?.hasError('exists') && (this.form.get('phoneNumber')?.touched)"
+                        style="padding-top: 5px; padding-left: 5px; padding-bottom: 0; margin:0; color: darkred; text-align: left">
+                        <small>{{(form.get('phoneNumber')?.value)}} already exists!!</small>
+                </label>
+                <!-- <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                    <input type="text" pInputText placeholder="Email">
+                </div> -->
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+                    <input type="tel" formControlName="password"  type="password" pInputText placeholder="Password"
+                    [ngClass]="(this.form.get('password')?.hasError('required') && (this.form.get('password')?.touched)) ? 'ng-invalid ng-dirty':''"
+                    >
+                    
+                    <!-- <p-password id="password" placeholder="Password" formControlName="password" styleClass="w-full"  [toggleMask]="true" [feedback]="true"></p-password> -->
+                </div>
+                <!-- <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+                    <p-password id="password" placeholder="Password Again" styleClass="w-full"  [toggleMask]="true" [feedback]="false"></p-password>
+
+                </div> -->
+                <div>
+                    <button [disabled]="inProgress ||(!form.valid)"  label="{{inProgress? 'Please Wait':'Create Your Account'}}" type="submit" pButton pRipple class="w-full" label="Register"></button>
+                </div>
+                <div>
+                    <button  [routerLink]="'/user/login'" pButton pRipple class="w-full p-button-text text-primary-500" label="BACK TO LOGIN"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div [style.background]="'url(assets/layout/images/pages/accessDenied-bg.jpg)'"
+        class="hidden lg:flex flex-1 align-items-center justify-content-center bg-cover">
+        <img src="assets/layout/images/vector_logo.png" alt="">
+    </div>
+</div>
+
+<app-config [minimal]="true"></app-config>

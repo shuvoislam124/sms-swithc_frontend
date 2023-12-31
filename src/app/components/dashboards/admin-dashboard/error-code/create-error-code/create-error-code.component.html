@@ -1,0 +1,47 @@
+<form [formGroup]="_service.form" (ngSubmit)="onSubmit()">
+    <div class=" p-fluid" bis_skin_checked="1">
+        <div class="field" bis_skin_checked="1">
+            <label htmlfor="sms_contents">Error Code </label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-code"></i>
+                <input type="number" pInputText pKeyFilter="int" placeholder="code" formControlName="code"  />
+            </span>
+        </div>
+        <div class="field" bis_skin_checked="1">
+            <label htmlfor="sms_contents">Display  Code </label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-info"></i>
+                <input pInputText pKeyFilter="int" placeholder="display code" formControlName="displayCode" />
+            </span>
+        </div>
+        <div class="field" bis_skin_checked="1">
+            <label htmlfor="sms_contents">Code Description</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-info-circle"></i>
+                <input formControlName="description" pInputText pKeyFilter="int" placeholder="code Description"/>
+            </span>
+        </div>
+        
+        <div class="field" bis_skin_checked="1">
+            <label htmlfor="sms_contents">Retry Options</label>
+            <div class="card flex ">
+                <div class="flex  gap-3" >
+                    <div *ngFor="let retryOption of retryOptions" class="field-checkbox">
+                        <p-radioButton [inputId]="retryOption.name" [value]="retryOption.value" formControlName="retry"></p-radioButton>
+                        <label [for]="retryOption.name" class="ml-2">{{ retryOption.name }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       
+        <div class="flex justify-content-end">
+            <span class="mr-2">
+                <button (click)="onCancel()" pButton pRipple label="Cancel" class="p-button-danger"></button>
+            </span>
+            <span>
+                <button [disabled]="inProgress || _service.form.invalid" type="submit" pButton pRipple [label]="inProgress ? 'wait': _service.form.get('id').value!=null?'Update':'Add'" class="p-button-primary"></button>
+            </span>
+        </div>
+    </div>  
+</form>

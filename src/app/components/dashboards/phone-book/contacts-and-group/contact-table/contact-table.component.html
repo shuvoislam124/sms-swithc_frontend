@@ -1,0 +1,76 @@
+<p-table #dt1 
+        [lazy]="true" 
+        (onLazyLoad)="GetAll($event)"
+        [value]="list"
+        [paginator]="true" 
+        [tableStyle]="{'min-width': '75rem'}"
+    [rows]="10"
+      [totalRecords]="totalRecords"
+      [loading]="loading" 
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="[10,15,20]"
+      paginatorLocale="fa-IR"
+      >
+      <ng-template pTemplate="caption">
+        <div  class="row" style="justify-content: space-between;">
+            
+            <div class="col-lg-6">
+                <div class="flex">
+                    <span class="p-input-icon-left p-ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text"  (input)="dt1.filterGlobal(getVal($event), 'contains')"
+                          placeholder="Search keyword" />
+                      </span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <span style="float: right;">
+                    <!-- <p-button   icon="pi pi-plus" label="Add Contact"></p-button>
+                    <p-button (click)="onCreate()"  icon="pi pi-plus" label="Import Contact" severity="danger"></p-button> -->
+                    <button class="btn btn-primary mx-2" (click)="onCreate()"><i class="pi pi-plus"></i>Add Contact</button>
+                    <button class="btn btn-info" (click)="onImoport()"><i class="pi pi-file-import"></i>Import Contact</button>
+                </span>
+            </div>
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+
+        
+        <tr>
+            <th class="text-center" style="width: 4rem">Serial</th>
+            <th class="text-center" pSortableColumn="name">Contact <p-sortIcon field="name"></p-sortIcon></th>
+            <th class="text-center" >Name </th>
+            <th class="text-center" >Email </th>
+            <th class="text-center" >Group </th>
+            <th class="text-center" >Status</th>
+            <th class="text-center" >Action</th>
+        </tr>
+        
+    </ng-template>
+    <ng-template pTemplate="body" let-contact let-i="rowIndex">
+        <tr>
+            <td>{{i+1}}</td>
+            <td class="text-center">{{contact.number}}</td>
+            <td class="text-center">{{contact.name}}</td>
+            <td class="text-center">{{contact.email}}</td>
+            <td class="text-center">{{this.groupName}}</td>
+            <td class="text-center">{{contact.isEnable}}</td>
+            <td>
+                <div style="display:block; width:fit-content; margin:auto;">
+                    <div class="display:flex;">
+                    <button (click)="onEdit(contact)" class="btn btn-primary rounded mx-1"><i class="pi pi-pencil"></i></button>
+                    <button (click)="onDelete(contact.id)" class="btn btn-danger rounded mx-1"><i class="pi pi-trash"></i></button>
+                    <button class="btn btn-primary rounded mx-1"><i class="pi pi-download"></i></button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-dialog header="Add Contact" [position]="'top'" (onHide)="LoadData()" [(visible)]="_service.displayModal" [style]="{width: '50vw'}">
+    <app-add-contact [groupId]="groupId"></app-add-contact>
+</p-dialog>
+<p-dialog header="Import Contact" [position]="'top'" (onHide)="LoadData()" [(visible)]="_service.displayImportModal" [style]="{width: '50vw'}">
+    <app-import-contact [groupId]="groupId"></app-import-contact>
+</p-dialog>
