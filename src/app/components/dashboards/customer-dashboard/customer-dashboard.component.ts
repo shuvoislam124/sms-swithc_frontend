@@ -38,12 +38,15 @@ constructor(private _accountService:AccountService,
  transactions:any[];
  transactionTableLoading = false;
  totalTransactions = 0;
+ //showTransalctionTable=true;
  loadTransaction(event:LazyLoadEvent | any){
     this.transactionTableLoading = true;
     if(event != null){
         this._transactionService.getAllTransaction(event).subscribe({next:(res)=>{
             this.transactions = res.value;
             this.totalTransactions = res.totalRecords;
+            // if(res.totalRecords==0)
+            //     this.showTransalctionTable = false;
             //console.log(res);
         },
         error:(err)=>{

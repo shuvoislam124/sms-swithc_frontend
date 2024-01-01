@@ -23,7 +23,7 @@
         </div>
     </div>
     <div style="background-color: #e0ebf9; color: #327ad5; margin-top: 10px;">
-        <p style="padding:25px 10px;"><span class="fw-bold">API URL (GET & POST): </span><span> http://202.164.208.226/smsapi?api_key=(APIKEY)&type=text&contacts=(NUMBER)&senderid=(Approved Sender ID)&msg=(Message Content)</span></p>
+        <p style="padding:25px 10px;"><span class="fw-bold">API URL (GET & POST): </span><span>{{apiAddress}}sms/send?apiKey=<span class="fw-bold" *ngIf="apiKey">{{apiKey.key}}</span><span class="fw-bold" *ngIf="!apiKey">{{'{Your API Key'}}</span>&contactNumbers=<span class="fw-bold">{{'{Ex: 01XXXXXXXXX}'}}</span>&senderId=<span class="fw-bold">{{'{Your Sender Id}'}}</span>&textBody=<span clss="fw-bold">{{'{Message Body}'}}</span></span></p>
     </div>
     <div style="margin-top: 10px;">
         <p-table [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
@@ -52,12 +52,12 @@
     <p>Credit Balance API</p>
     <div style="background-color: #e0ebf9; ">
         <div style="padding: 25px 10px;">
-            <p><span class="fw-bold">API URL :</span> <span>http://202.164.208.226/miscapi/(API Key )/getBalance</span></p>
-            <p><span class="fw-bold">API URL :</span> <span>Your API Key ()</span></p>
+            <p><span class="fw-bold">API URL :</span> <span>{{apiAddress}}sms/balance?apiKey=<span class="fw-bold">{{'{Your API Key }'}}</span></span></p>
+            
         </div>
     </div>
 </div>
-<div style="margin-top:30px">
+<!-- <div style="margin-top:30px">
     <p>Delivery Report API</p>
     <div style="background-color: #e0ebf9; ">
         <div style="padding: 25px 10px;">
@@ -79,7 +79,7 @@
             
         </div>
     </div>
-</div>
+</div> -->
 <div style="margin-top: 30px;">
     <p>Error Code & Meaning</p>
     <p-table [value]="errors" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
@@ -101,7 +101,7 @@
        
     </p-table>        
 </div>
-<button class="btn-type-1 text-center my-3" style="display: block; margin:auto;">Buy Credit</button>
+<button [routerLink]="'/payment/buy_credit'" class="btn-type-1 text-center my-3" style="display: block; margin:auto;">Buy Credit</button>
 
 <p-dialog header="API Key" [position]="'top'" (onHide)="this.keyService.keyModified" [(visible)]="this.keyService.showModal" [style]="{width: '300px'}">
     <p>

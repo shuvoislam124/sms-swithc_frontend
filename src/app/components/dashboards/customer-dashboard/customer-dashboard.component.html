@@ -169,8 +169,10 @@
         </div>
     </div> -->
     <div class="col-12 md:col-12 lg:col-6">
+        
         <div class="card h-full">
-            <p-table *ngIf="transactions; else advertisement" [value]="transactions" 
+            <h5 class="text-center">Transactions</h5>
+            <p-table  [value]="transactions" 
                     [paginator]="true" 
                     [rows]="8" 
                     [lazy] ="true"

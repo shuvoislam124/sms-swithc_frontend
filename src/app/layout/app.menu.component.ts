@@ -142,11 +142,11 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/reporting/dlr_scheduled/upcoming']
                             },
                             
-                            {
-                                label: 'DLR- API',
-                                icon: 'pi pi-table',
-                                routerLink: ['/developers']
-                            },
+                            // {
+                            //     label: 'DLR- API',
+                            //     icon: 'pi pi-table',
+                            //     routerLink: ['/developers']
+                            // },
                             // {
                             //     label: 'DLR- Scheduled',
                             //     icon: 'pi pi-chart-pie',
@@ -170,28 +170,6 @@ export class AppMenuComponent implements OnInit {
                     
                 ]
             },
-            // {
-            //     label: 'API docs',
-            //     icon: 'pi pi-code',
-            //     items: [
-
-            //         {
-            //             label: 'API Docs',
-            //             icon: 'pi pi-code',
-            //             items: [
-                            
-            //                 {
-            //                     label: 'Developer',
-            //                     icon: 'pi pi-code',
-            //                     routerLink: ['/developers']
-            //                 },
-
-            //             ]
-            //         },
-                    
-                    
-            //     ]
-            // },
             {
                 label: 'Payments',
                 icon: 'pi pi-dollar',
@@ -220,6 +198,29 @@ export class AppMenuComponent implements OnInit {
                     
                 ]
             },
+            {
+                label: 'API docs',
+                icon: 'pi pi-code',
+                items: [
+
+                    {
+                        label: 'API Docs',
+                        icon: 'pi pi-code',
+                        items: [
+                            
+                            {
+                                label: 'Developer',
+                                icon: 'pi pi-code',
+                                routerLink: ['/developers']
+                            },
+
+                        ]
+                    },
+                    
+                    
+                ]
+            },
+            
             {
                 label: 'Administration',
                 icon: 'pi pi-dollar',
