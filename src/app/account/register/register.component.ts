@@ -14,7 +14,6 @@ export class RegisterComponent {
   constructor(private _formBuilder:FormBuilder, private messageService:MessageService, private _accountService: AccountService, private router:Router){}
   inProgress: boolean = false;
   form = this._formBuilder.group({
-    
     password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
     phoneNumber: [null, Validators.compose([Validators.required, Validators.maxLength(11), Validators.minLength(11)])],
    

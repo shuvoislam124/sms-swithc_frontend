@@ -4,6 +4,8 @@ import { Table, TableModule } from 'primeng/table';
 import { CustomerService } from 'src/app/demo/service/customer.service';
 import { Customer, Representative } from 'src/app/demo/api/customer';
 import { InputTextModule } from 'primeng/inputtext';
+import { PriceAndCoverageService } from './price-and-coverage.service';
+import { HttpStatusCode } from '@angular/common/http';
 
 
 @Component({
@@ -23,16 +25,22 @@ export class PriceAndCoverageComponent {
     loading: boolean = true;
 
     activityValues: number[] = [0, 100];
-
-    constructor(private customerService: CustomerService) {}
+    nonMaskinPrice;
+    constructor(private customerService: CustomerService, private _service:PriceAndCoverageService) {}
 
     ngOnInit() {
         this.customerService.getCustomersLarge().then((customers) => {
             this.prices = customers;
-            this.loading = false;
-
+            
            // this.customers.forEach((customer) => (customer.date = new Date(<Date><unknown>customer.date)));
         });
+        this._service.GetNonMaskingPrice().subscribe((response:any)=>{
+          if(response.statusCode==HttpStatusCode.Ok){
+            this.nonMaskinPrice = response.value;
+            console.log(response);
+          }
+          this.loading = false;
+        })
 
 
     }

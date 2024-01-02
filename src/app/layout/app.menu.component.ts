@@ -206,15 +206,8 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'API Docs',
                         icon: 'pi pi-code',
-                        items: [
-                            
-                            {
-                                label: 'Developer',
-                                icon: 'pi pi-code',
-                                routerLink: ['/developers']
-                            },
-
-                        ]
+                        routerLink: ['/developers']
+                        
                     },
                     
                     
@@ -248,10 +241,15 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/reporting/dlr_admin_panel']
                     },
                     {
+                        label: 'Clients',
+                        icon: 'pi pi-users',
+                        routerLink: ['/admin/clients']
+                    },
+                    {
                         label: 'SMS Statistics',
                         icon: 'pi pi-chart-line',
                         routerLink: ['/reporting/sms_statistics']
-                    }
+                    },
                     
                 ]
             },
