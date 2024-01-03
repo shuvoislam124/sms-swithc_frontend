@@ -1,114 +1,212 @@
 <h3>Developers API</h3>
-<div class="card">
-    <p>Text SMS API</p>
-    <div>
-        <div style="display: flex; align-items: center;">
-            <p style="margin-top: .6rem; padding-right: 10px;">Your API key:<span class="fw-bold" *ngIf="apiKey">{{apiKey.key}}</span></p>
-            <button (click)="OngenerateClick()" class="btn-type-1">{{apiKey?'Regenerate Key':'Generate Key'}}</button>
+<div>
+    <!-- <div *ngIf="activeItem == items[2]" >
+        <h5><p-checkbox [(ngModel)]="isSkipApiApproval" [binary]="true" name="isSkipApiApproval" inputId="binary"></p-checkbox> I want to skip the section</h5>
+        <form class="p-fluid" *ngIf="!isSkipApiApproval" [formGroup]="userApiApprovalFG" (ngSubmit)="onSubmitForms($event)">
+            
+            <div class="field">
+                <label htmlfor="name">Company Name</label>
+                <input type="text"  pInputText formControlName="companyName"  />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyName')?.hasError('required')) && (this.userApiApprovalFG.get('companyName')?.touched)">
+                    Comapany Name Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name1">Company Email</label>
+                <input  pInputText formControlName="companyEmail" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyEmail')?.hasError('required')) && (this.userApiApprovalFG.get('companyEmail')?.touched)">
+                    Comapany Email Field is required 
+                </label>
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyEmail')?.hasError('email')) && (this.userApiApprovalFG.get('companyEmail')?.touched)">
+                    Enter a valid email
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name">Company Contact Person Name </label>
+                <input  pInputText formControlName="companyContactPersonName" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPersonName')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPersonName')?.touched)">
+                    Comapany Contact Person Name Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name">Company Contact Person Phone Number </label>
+                <input  pInputText formControlName="companyContactPersonPhoneNumber" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPersonPhoneNumber')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPersonPhoneNumber')?.touched)">
+                    Comapany Contact Person Phone Number Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name">Company Contact  Number </label>
+                <input  pInputText formControlName="companyContactPhoneNumber" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPhoneNumber')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPhoneNumber')?.touched)">
+                    Comapany Contact Number  Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="companyWebSiteUrl">Website URL</label>
+                <input  pInputText formControlName="companyWebSiteUrl" />
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyWebSiteUrl')?.hasError('required')) && (this.userApiApprovalFG.get('companyWebSiteUrl')?.touched)">
+                    Comapany Website Url Field is required 
+                </label>
+            </div>
+            <div class="field">
+                <label htmlfor="name1">Application URL</label>
+                <input  pInputText formControlName="applicationUrl"/>
+            </div>
+            
+            <div class="field">
+                <label htmlfor="name1">Tread License Number</label>
+                <input  pInputText formControlName="treadLicenceseNumber"/>
+                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('treadLicenceseNumber')?.hasError('required')) && (this.userApiApprovalFG.get('treadLicenceseNumber')?.touched)">
+                    trade License Number Field is required 
+                </label>
+            </div>
+            <div class="field">
+                
+                <div class="field" bis_skin_checked="1">
+                    <label htmlfor="filedata">Tread License Upload  </label>
+                    <br>
+                    <label class="custom-file-upload">
+                        <input type="file" id="treadLicense" name="treadLicense"  (change)="onFileSelectedInuserApiApprovalFG($event, 'treadLicense')" />
+                        {{ userApiApprovalFG.value?.treadLicense?.name || 'Choose Your License' }} <i class="pi pi-file-import
+                        "></i>
+                        
+                    </label>
+                    <br>
+                    <br>
+                    <label class="error-label" *ngIf="(this.userApiApprovalFG.get('treadLicense')?.hasError('size'))">
+                        {{this.userApiApprovalFG.get('treadLicense').getError('size')}}
+                    </label>
+                    <br>  
+                    <label class="error-label" *ngIf="(this.userApiApprovalFG.get('treadLicense')?.hasError('type'))">
+                        {{this.userApiApprovalFG.get('treadLicense').getError('type')}}
+                    </label>
+                    <br>  
+                    
+                </div>
+            </div>
+            
+            <button   (click)="onActiveItemChangeByIndex(3)" style="margin-right: 10px;" class="btn-type-1">Next</button>
+            <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Previous</button>
+        </form>
+        <div *ngIf="isSkipApiApproval">
+            <button  (click)="onActiveItemChangeByIndex(3)" style="margin-right: 10px;" class="btn-type-1">Next</button>
+            <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Previous</button>
         </div>
-        
-    </div> 
-    <div class="flex">
-        <div >
-            <span class="fw-bold" >JSON data format:</span>
-            <span class="link-text-orange">One to many</span>
-            |
-            <span class="link-text-orange" style="padding-right: 10px;">Many to many</span>
-        </div>
+    </div> -->
+</div>
+<div >
+    <div class="card" >
+        <p>Text SMS API</p>
         <div>
-            <span class="fw-bold">PHP Surce code:</span>
-            <span class="link-text-orange">One to many</span>
-            |
-            <span class="link-text-orange">Many to many</span>
+            <div  style="display: flex; align-items: center;">
+                <p style="margin-top: .6rem; padding-right: 10px;">Your API key:<span class="fw-bold" *ngIf="apiKey">{{apiKey.key}}</span></p>
+                <button (click)="OngenerateClick()" class="btn-type-1">{{apiKey?'Regenerate Key':'Generate Key'}}</button>
+            </div>
+            
+        </div> 
+        <div class="flex">
+            <div >
+                <span class="fw-bold" >JSON data format:</span>
+                <span class="link-text-orange">One to many</span>
+                |
+                <span class="link-text-orange" style="padding-right: 10px;">Many to many</span>
+            </div>
+            <div>
+                <span class="fw-bold">PHP Surce code:</span>
+                <span class="link-text-orange">One to many</span>
+                |
+                <span class="link-text-orange">Many to many</span>
+            </div>
+        </div>
+        <div style="background-color: #e0ebf9; color: #327ad5; margin-top: 10px;">
+            <p style="padding:25px 10px;"><span class="fw-bold">API URL (GET & POST): </span><span>{{apiAddress}}sms/send?apiKey=<span class="fw-bold" *ngIf="apiKey">{{apiKey.key}}</span><span class="fw-bold" *ngIf="!apiKey">{{'{Your API Key'}}</span>&contactNumbers=<span class="fw-bold">{{'{Ex: 01XXXXXXXXX}'}}</span>&senderId=<span class="fw-bold">{{'{Your Sender Id}'}}</span>&textBody=<span clss="fw-bold">{{'{Message Body}'}}</span></span></p>
+        </div>
+        <div style="margin-top: 10px;">
+            <p-table [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
+               
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td>{{ product.perameterName }}</td>
+                        <td>{{ product.meaning }}</td>
+                        <td>{{ product.description}}</td>
+                        
+                    </tr>
+                </ng-template>
+               
+            </p-table>        
         </div>
     </div>
-    <div style="background-color: #e0ebf9; color: #327ad5; margin-top: 10px;">
-        <p style="padding:25px 10px;"><span class="fw-bold">API URL (GET & POST): </span><span>{{apiAddress}}sms/send?apiKey=<span class="fw-bold" *ngIf="apiKey">{{apiKey.key}}</span><span class="fw-bold" *ngIf="!apiKey">{{'{Your API Key'}}</span>&contactNumbers=<span class="fw-bold">{{'{Ex: 01XXXXXXXXX}'}}</span>&senderId=<span class="fw-bold">{{'{Your Sender Id}'}}</span>&textBody=<span clss="fw-bold">{{'{Message Body}'}}</span></span></p>
+    <div style="margin-top:30px">
+        <p>Credit Balance API</p>
+        <div style="background-color: #e0ebf9; ">
+            <div style="padding: 25px 10px;">
+                <p><span class="fw-bold">API URL :</span> <span>{{apiAddress}}sms/balance?apiKey=<span class="fw-bold">{{'{Your API Key }'}}</span></span></p>
+                
+            </div>
+        </div>
     </div>
-    <div style="margin-top: 10px;">
-        <p-table [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
+    <!-- <div style="margin-top:30px">
+        <p>Delivery Report API</p>
+        <div style="background-color: #e0ebf9; ">
+            <div style="padding: 25px 10px;">
+                <p><span class="fw-bold">API URL :</span> <span> http://202.164.208.226/miscapi/(API Key )/getDLR/getAll</span></p>
+                <p><span class="fw-bold">API URL :</span> <span>Your API Key ()</span></p>
+                <p><span class="fw-bold">Chunk per Call :</span> <span>100</span></p>
+                <p><span class="fw-bold">SMS Shoot ID : </span> <span> Enter the SMS ID returned when submitted SMS via API. It will return an array having mobile numbers and their DLR status.</span></p>
+                <p><span class="fw-bold">API URL :  </span> <span> http://202.164.208.226/miscapi/(API Key )/getDLR/(SMS SHOOT ID)</span></p>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:30px">
+        <p>API Key Retrieval</p>
+        <div style="background-color: #e0ebf9; ">
+            <div style="padding: 25px 10px;">
+                <p><span class="fw-bold">API URL :</span> <span> http://202.164.208.226/getkey/(username)/( password)</span></p>
+                <p><span class="fw-bold">Username :</span> <span>Your account User ID used to login.</span></p>
+                <p><span class="fw-bold">Password  :</span> <span>Account password that you use to login.</span></p>
+                
+            </div>
+        </div>
+    </div> -->
+    <div style="margin-top: 30px;">
+        <p>Error Code & Meaning</p>
+        <p-table [value]="errors" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
            
             <ng-template pTemplate="header">
                 <tr>
                     <th>Code</th>
-                    <th>Name</th>
-                    <th>Description</th>
+                    <th>Meaning</th>
+        
                     
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product>
                 <tr>
-                    <td>{{ product.perameterName }}</td>
+                    <td>{{ product.code }}</td>
                     <td>{{ product.meaning }}</td>
-                    <td>{{ product.description}}</td>
-                    
                 </tr>
             </ng-template>
            
         </p-table>        
     </div>
-</div>
-<div style="margin-top:30px">
-    <p>Credit Balance API</p>
-    <div style="background-color: #e0ebf9; ">
-        <div style="padding: 25px 10px;">
-            <p><span class="fw-bold">API URL :</span> <span>{{apiAddress}}sms/balance?apiKey=<span class="fw-bold">{{'{Your API Key }'}}</span></span></p>
-            
-        </div>
-    </div>
-</div>
-<!-- <div style="margin-top:30px">
-    <p>Delivery Report API</p>
-    <div style="background-color: #e0ebf9; ">
-        <div style="padding: 25px 10px;">
-            <p><span class="fw-bold">API URL :</span> <span> http://202.164.208.226/miscapi/(API Key )/getDLR/getAll</span></p>
-            <p><span class="fw-bold">API URL :</span> <span>Your API Key ()</span></p>
-            <p><span class="fw-bold">Chunk per Call :</span> <span>100</span></p>
-            <p><span class="fw-bold">SMS Shoot ID : </span> <span> Enter the SMS ID returned when submitted SMS via API. It will return an array having mobile numbers and their DLR status.</span></p>
-            <p><span class="fw-bold">API URL :  </span> <span> http://202.164.208.226/miscapi/(API Key )/getDLR/(SMS SHOOT ID)</span></p>
-        </div>
-    </div>
-</div>
-<div style="margin-top:30px">
-    <p>API Key Retrieval</p>
-    <div style="background-color: #e0ebf9; ">
-        <div style="padding: 25px 10px;">
-            <p><span class="fw-bold">API URL :</span> <span> http://202.164.208.226/getkey/(username)/( password)</span></p>
-            <p><span class="fw-bold">Username :</span> <span>Your account User ID used to login.</span></p>
-            <p><span class="fw-bold">Password  :</span> <span>Account password that you use to login.</span></p>
-            
-        </div>
-    </div>
-</div> -->
-<div style="margin-top: 30px;">
-    <p>Error Code & Meaning</p>
-    <p-table [value]="errors" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
-       
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Code</th>
-                <th>Meaning</th>
+    <button [routerLink]="'/payment/buy_credit'" class="btn-type-1 text-center my-3" style="display: block; margin:auto;">Buy Credit</button>
     
-                
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product>
-            <tr>
-                <td>{{ product.code }}</td>
-                <td>{{ product.meaning }}</td>
-            </tr>
-        </ng-template>
-       
-    </p-table>        
+    <p-dialog header="API Key" [position]="'top'" (onHide)="this.keyService.keyModified" [(visible)]="this.keyService.showModal" [style]="{width: '300px'}">
+        <p>
+            Are you sure you want to regenerate API Key? Old implementations of the API would not work unless you update newly generated API Key in those. Shall we proceed?
+        </p>
+        <div class="d-flex justify-content-between">
+            <button [disabled]="keyGenerating" (click)="GenerateButtonClicked()" class="btn btn-success">{{!keyGenerating?(apiKey?'Regenerate':'Generate'):'Generating'}}</button>
+            <button class="btn btn-danger ">Cancel</button>
+        </div>
+    </p-dialog>
 </div>
-<button [routerLink]="'/payment/buy_credit'" class="btn-type-1 text-center my-3" style="display: block; margin:auto;">Buy Credit</button>
-
-<p-dialog header="API Key" [position]="'top'" (onHide)="this.keyService.keyModified" [(visible)]="this.keyService.showModal" [style]="{width: '300px'}">
-    <p>
-        Are you sure you want to regenerate API Key? Old implementations of the API would not work unless you update newly generated API Key in those. Shall we proceed?
-    </p>
-    <div class="d-flex justify-content-between">
-        <button [disabled]="keyGenerating" (click)="GenerateButtonClicked()" class="btn btn-success">{{!keyGenerating?(apiKey?'Regenerate':'Generate'):'Generating'}}</button>
-        <button class="btn btn-danger ">Cancel</button>
-    </div>
-</p-dialog>

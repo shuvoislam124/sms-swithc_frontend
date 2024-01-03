@@ -7,6 +7,8 @@ import { SharedService } from 'src/app/components/shared/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpStatusCode } from '@angular/common/http';
 import { AuthModel } from './auth-model';
+import { MenueItemsService } from 'src/app/layout/menue-items.service';
+import { updateArrayByProperty } from 'src/app/shared/helper-functions/functions';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +17,20 @@ import { AuthModel } from './auth-model';
 })
 export class LoginComponent implements OnInit{
   
-  constructor(private _formBuilder:FormBuilder, private _loginService: LoginService, private messageService:MessageService,private _sharedService: SharedService,
-    private route: ActivatedRoute, private router: Router
+  constructor(
+    private _formBuilder:FormBuilder, 
+    private _loginService: LoginService, 
+    private messageService:MessageService,
+    private _sharedService: SharedService,
+    private menueItemService:MenueItemsService,
+    private route: ActivatedRoute, 
+    private router: Router
     ){}
+    menueItems:any[]=[];
   ngOnInit(): void {
+    this.menueItemService.menuItems$.subscribe((value)=>{
+      this.menueItems = value;
+    })
     localStorage.removeItem('Token');
     this.returnUrl = this.route.snapshot.queryParams['return'] || '';
   }
@@ -42,6 +54,8 @@ export class LoginComponent implements OnInit{
           this._sharedService.showSuccess('Login successful');
           let token: AuthModel = response.value;
           localStorage.setItem('Token', JSON.stringify(token));
+          updateArrayByProperty(this.menueItems,'label',['Pricing','Messaging','Phone Book','Reports'],'visible',JSON.parse(localStorage.getItem('Token'))['anyTransactions'])
+          this.menueItemService.updateMenuItems(this.menueItems);
           this.router.navigate([this.returnUrl]);
         } else
           this._sharedService.HandleSuccessMessage(response);

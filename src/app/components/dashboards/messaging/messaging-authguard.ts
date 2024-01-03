@@ -4,7 +4,6 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 export class MessagingAuthGuard implements CanActivate{
     constructor( private router: Router) {
     }
-
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         
         const fullName = JSON.parse(localStorage.getItem('Token') ?? '')['fullName']

@@ -11,13 +11,13 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddClientComponent } from './clients/add-client/add-client.component';
-
-
+import { ClientComponent } from './clients/client/client.component';
 @NgModule({
   declarations: [
     AdminDashboardComponent,
     ClientsComponent,
-    AddClientComponent
+    AddClientComponent,
+    ClientComponent
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@ export interface AuthModel {
     email: string,
     token: string,
     userId: string,
+    apiFeature:boolean,
     refreshToken: string,
     tokenExpireTime: Date,
     refreshTokenExpireTime: Date,

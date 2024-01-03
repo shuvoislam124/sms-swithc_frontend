@@ -146,12 +146,22 @@
                     <br>  
                 </div>
             </div>
-            <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Next</button>
+            <!-- <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Next</button> -->
             <button  (click)="onActiveItemChangeByIndex(0)" style="margin-right: 10px;" class="btn-type-1">Previous</button>
+            <div style="width: fit-content; margin: auto;">
+                <p *ngIf="this.peronalInformationFG.invalid || this.nIDInformationFG.invalid" style="color: red; font-size: 20px;"> You need to fill up all the necessary field first to submit</p>
+               <form>
+                <h5><p-checkbox [disabled]="this.peronalInformationFG.invalid || this.nIDInformationFG.invalid" [(ngModel)]="agreeToSubmit" [binary]="true" inputId="binary" name="fullName"></p-checkbox>I am Agree to submit All my Information</h5>
+               </form>
+                <div style="width: fit-content; margin: auto;">
+                    <!-- <button  [disabled]="!agreeToSubmit || this.peronalInformationFG.invalid || this.nIDInformationFG.invalid" (click)="onSumbit()" class="btn-type-1">{{submitWorking? 'Please Wait':'Submit'}}</button> -->
+                    <button [disabled]="inProgress ||(this.peronalInformationFG.invalid || this.nIDInformationFG.invalid)" (click)="onSumbit()"  label="{{inProgress? 'Please Wait':'Submit'}}" type="submit" pButton pRipple class="w-full" label="Submit"></button>
+                </div>
+            </div>
         </form>
     </div>
     
-    <div *ngIf="activeItem == items[2]" >
+    <!-- <div *ngIf="activeItem == items[2]" >
         <h5><p-checkbox [(ngModel)]="isSkipApiApproval" [binary]="true" name="isSkipApiApproval" inputId="binary"></p-checkbox> I want to skip the section</h5>
         <form class="p-fluid" *ngIf="!isSkipApiApproval" [formGroup]="userApiApprovalFG" (ngSubmit)="onSubmitForms($event)">
             
@@ -244,7 +254,7 @@
             <button  (click)="onActiveItemChangeByIndex(3)" style="margin-right: 10px;" class="btn-type-1">Next</button>
             <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Previous</button>
         </div>
-    </div>
+    </div> -->
     <div *ngIf="activeItem == items[3]" style="margin-top: 200px;">
         <div style="width: fit-content; margin: auto;">
             <p *ngIf="this.peronalInformationFG.invalid || this.nIDInformationFG.invalid" style="color: red; font-size: 20px;"> You need to fill up all the necessary field first to submit</p>

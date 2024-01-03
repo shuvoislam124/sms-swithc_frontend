@@ -42,14 +42,12 @@ export class RegisterComponent {
           this.navigateToLoginModalShow=true;
         }
       })
-
-      
     }
 
   }
   navigateToLogin(){
     this.navigateToLoginModalShow=false;
     this.router.navigateByUrl('/user/login');
-  
   }
+  
 }

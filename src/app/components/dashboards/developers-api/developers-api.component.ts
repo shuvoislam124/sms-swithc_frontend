@@ -3,13 +3,42 @@ import { DeveloperApiKeyService } from './developer-api-key.service';
 import { HttpStatusCode } from '@angular/common/http';
 import { SharedService } from '../../shared/shared.service';
 import { apiUrl } from 'src/main';
-
+import { FormGroup } from '@angular/forms';
+interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
+}
 @Component({
   selector: 'app-developers-api',
   templateUrl: './developers-api.component.html',
   styleUrls: ['./developers-api.component.scss']
 })
 export class DevelopersApiComponent implements OnInit {
+  userApiApprovalFG!:FormGroup;
+  tradeLicense!:File;
+  onFileSelectedInuserApiApprovalFG(event: Event, controlName: string){
+    //this.userApiApprovalFG.get(controlName).clearValidators();
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files) {
+    const file = fileInput.files[0];
+    if((fileInput.files[0].size/1024)>500)
+    {
+      this.userApiApprovalFG.get(controlName).setErrors({'size':`The minimum file size is 500KB`});
+      return;
+    }
+    const type = fileInput.files[0].type;
+    if((type ==="image/jpeg") || (type === "image/png") || (type === "image/jpg"))
+    {
+      this.userApiApprovalFG.get(controlName)?.setValue(file);
+      return;
+    }
+    this.userApiApprovalFG.get(controlName).setErrors({'type':`File type should jpg/png/jpeg`});
+    }
+  }
+  onTradLicencesUpload(event:UploadEvent){
+    this.tradeLicense = event.files[0];
+    this.userApiApprovalFG.value.treadLicense = this.tradeLicense;
+  }
   constructor(
     public keyService:DeveloperApiKeyService,
     private _sharedService:SharedService
@@ -18,9 +47,11 @@ export class DevelopersApiComponent implements OnInit {
   apiAddress= apiUrl;
   apiKey=null;
   products!:any[];
+  apiFeatureEnable;
   errors!:any[];
   keyGenerating = false;
   ngOnInit(): void {
+    this.apiFeatureEnable  = JSON.parse(localStorage.getItem('Token'))['apiFeature']
     this.products = [
       {perameterName:'apiKey', meaning:'API Key', description:'Your API Key ()'},
       {perameterName:'type', meaning:'text/unicode', description:'text for normal SMS/unicode for Bangla SMS'},

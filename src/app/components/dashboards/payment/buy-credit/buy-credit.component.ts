@@ -3,6 +3,7 @@ import { BkashService } from '../services/bkash.service';
 import { TransationService } from '../services/transation.service';
 import { AccountService } from 'src/app/account/services/account.service';
 import { Observable } from 'rxjs';
+import { MenueItemsService } from 'src/app/layout/menue-items.service';
 
 @Component({
   selector: 'app-buy-credit',
@@ -11,14 +12,20 @@ import { Observable } from 'rxjs';
 })
 export class BuyCreditComponent  implements OnInit{
   Transactions:any[] = [];
+  menueItems:any[]=[];
   constructor(private bkashService:BkashService, 
     private transactionService: TransationService,
-    private _accountService:AccountService){}
+    private _accountService:AccountService,
+    private menueItemService:MenueItemsService){}
   availableBalance$:Observable<any>;
   ngOnInit(): void {
     this.getAvalibleBalane();
     this.getLatestTransaction();
+    this.menueItemService.menuItems$.subscribe((value)=>{
+      this.menueItems = value;
+    })
   }
+  
   getAvalibleBalane(){
     this.bkashService.getAvailableBalanceAmount().subscribe(res=>{
       this.availableBalance = res.amount;

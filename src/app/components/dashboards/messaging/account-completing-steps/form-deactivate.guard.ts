@@ -18,5 +18,5 @@ export const formDeactivateGuard: CanDeactivateFn<AccountCompletingStepsComponen
         component.isVisibleSaveDialog = false;
         resolve(result);
       });
-    });
+  });
 }

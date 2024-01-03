@@ -13,3 +13,10 @@ export function GetOperatorNameByItsPhoneNumber(number:string){
         return 'Unknown';
 
 }
+export function updateArrayByProperty(array, key, values, propertyToUpdate, valueToAdd) {
+    array.forEach(obj => {
+      if (values.includes(obj[key])) {
+        obj[propertyToUpdate] = valueToAdd;
+      }
+});
+}

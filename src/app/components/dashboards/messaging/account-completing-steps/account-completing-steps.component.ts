@@ -137,8 +137,8 @@ export class AccountCompletingStepsComponent implements OnInit{
         this.items = [
             { label: 'Personal Information', icon: 'pi pi-fw pi-home' },
             { label: 'NID Information', icon: 'pi pi-fw pi-calendar' },
-            { label: 'API Approval', icon: 'pi pi-fw pi-pencil' },
-            { label: 'Confirmation', icon: 'pi pi-fw pi-file' },
+            // { label: 'API Approval', icon: 'pi pi-fw pi-pencil' },
+            // { label: 'Confirmation', icon: 'pi pi-fw pi-file' },
             
         ];
         

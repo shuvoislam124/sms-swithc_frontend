@@ -18,8 +18,6 @@ export class AddClientComponent {
     private _sharedService:SharedService,
     private messageService:MessageService 
     ) {
-    
-    
   }
   inProgress: boolean = false;
   
