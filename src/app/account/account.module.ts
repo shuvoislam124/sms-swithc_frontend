@@ -13,11 +13,15 @@ import { PasswordModule } from 'primeng/password';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
+import { OtpValidationComponent } from './otp-validation/otp-validation.component';
+import { NumberValidatorDirective } from '../shared/directives/number-validator.directive';
+import { NumericOnlyDirective } from '../shared/directives/numeric-only.directive';
 
 @NgModule({
   declarations: [
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    OtpValidationComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,9 @@ import { DialogModule } from 'primeng/dialog';
     AppConfigModule,
     RippleModule,
     PasswordModule,
-    DialogModule
+    DialogModule,
+    NumericOnlyDirective
+    
   ],
   providers:[MessageService, ConfirmationService]
 })

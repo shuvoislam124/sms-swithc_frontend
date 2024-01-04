@@ -9,7 +9,7 @@ export interface AuthModel {
     refreshToken: string,
     tokenExpireTime: Date,
     refreshTokenExpireTime: Date,
-
+    anyTransactions:boolean;
     // organizationId: string,
     // hasProfile: boolean
 }

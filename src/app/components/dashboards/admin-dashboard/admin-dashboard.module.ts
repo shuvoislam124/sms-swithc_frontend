@@ -12,12 +12,23 @@ import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddClientComponent } from './clients/add-client/add-client.component';
 import { ClientComponent } from './clients/client/client.component';
+import { TransactionDashboardComponent } from './transaction-dashboard/transaction-dashboard.component';
+import { SmsDashboardComponent } from './sms-dashboard/sms-dashboard.component';
+import { OperatorDashboardComponent } from './operator-dashboard/operator-dashboard.component';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { MenuModule } from 'primeng/menu';
+import { RippleModule } from 'primeng/ripple';
+import { ChartModule } from 'primeng/chart';
+import { SelectButtonModule } from 'primeng/selectbutton';
 @NgModule({
   declarations: [
     AdminDashboardComponent,
     ClientsComponent,
     AddClientComponent,
-    ClientComponent
+    ClientComponent,
+    TransactionDashboardComponent,
+    SmsDashboardComponent,
+    OperatorDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +40,14 @@ import { ClientComponent } from './clients/client/client.component';
     SplitButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    DialogModule
+    DialogModule,
+    TableModule,
+    ProgressBarModule,
+    MenuModule,
+    RippleModule,
+    ChartModule,
+    SelectButtonModule,    
+  
   ]
 })
 export class AdminDashboardModule { }

@@ -10,6 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
+import { NumericOnlyDirective } from 'src/app/shared/directives/numeric-only.directive';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PasswordModule } from 'primeng/password';
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    PasswordModule
+    PasswordModule,
+    NumericOnlyDirective
   ],
   exports:[]
 })

@@ -49,7 +49,11 @@
             <th class="text-center" >Status</th>
             <th class="text-center" >Action</th>
         </tr>
-        
+        <tr *ngIf="list.length==0">
+            <td colspan="7">
+                <p class="text-center">No Item to Show</p>
+            </td>
+        </tr>
     </ng-template>
     <ng-template pTemplate="body" let-contact let-i="rowIndex">
         <tr>

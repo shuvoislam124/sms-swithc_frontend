@@ -32,8 +32,6 @@
         </div>
     </ng-template>
     <ng-template pTemplate="header">
-
-        
         <tr>
             <th class="text-center" style="width: 4rem">Id</th>
             <th class="text-center" pSortableColumn="name">Group <p-sortIcon field="name"></p-sortIcon></th>
@@ -41,7 +39,11 @@
             <th class="text-center" >Actions </th>
             <th></th>
         </tr>
-        
+        <tr *ngIf="list.length==0">
+            <td colspan="5">
+                <p class="text-center">No Item to Show</p>
+            </td>
+        </tr>
     </ng-template>
     <ng-template pTemplate="body" let-group>
         <tr>

@@ -1,8 +1,8 @@
 <h3>Developers API</h3>
-<div>
-    <!-- <div *ngIf="activeItem == items[2]" >
-        <h5><p-checkbox [(ngModel)]="isSkipApiApproval" [binary]="true" name="isSkipApiApproval" inputId="binary"></p-checkbox> I want to skip the section</h5>
-        <form class="p-fluid" *ngIf="!isSkipApiApproval" [formGroup]="userApiApprovalFG" (ngSubmit)="onSubmitForms($event)">
+<div *ngIf="!apiFeatureEnable">
+    <div >
+        
+        <form class="p-fluid"  [formGroup]="userApiApprovalFG" (ngSubmit)="onSubmit()">
             
             <div class="field">
                 <label htmlfor="name">Company Name</label>
@@ -23,21 +23,21 @@
             </div>
             <div class="field">
                 <label htmlfor="name">Company Contact Person Name </label>
-                <input  pInputText formControlName="companyContactPersonName" />
+                <input  pInputText formControlName="companyContactPersonName"   />
                 <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPersonName')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPersonName')?.touched)">
                     Comapany Contact Person Name Field is required 
                 </label>
             </div>
             <div class="field">
                 <label htmlfor="name">Company Contact Person Phone Number </label>
-                <input  pInputText formControlName="companyContactPersonPhoneNumber" />
-                <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPersonPhoneNumber')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPersonPhoneNumber')?.touched)">
+                <input  pInputText formControlName="companyContactPersonPhoneNumber" appNumericOnly [prepend88ToNewLines]="true"  />
+                <label  class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPersonPhoneNumber')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPersonPhoneNumber')?.touched)">
                     Comapany Contact Person Phone Number Field is required 
                 </label>
             </div>
             <div class="field">
                 <label htmlfor="name">Company Contact  Number </label>
-                <input  pInputText formControlName="companyContactPhoneNumber" />
+                <input   pInputText formControlName="companyContactPhoneNumber" appNumericOnly [prepend88ToNewLines]="true"   />
                 <label class="error-label" *ngIf="(this.userApiApprovalFG.get('companyContactPhoneNumber')?.hasError('required')) && (this.userApiApprovalFG.get('companyContactPhoneNumber')?.touched)">
                     Comapany Contact Number  Field is required 
                 </label>
@@ -56,7 +56,7 @@
             
             <div class="field">
                 <label htmlfor="name1">Tread License Number</label>
-                <input  pInputText formControlName="treadLicenceseNumber"/>
+                <input   pInputText formControlName="treadLicenceseNumber" appNumericOnly  />
                 <label class="error-label" *ngIf="(this.userApiApprovalFG.get('treadLicenceseNumber')?.hasError('required')) && (this.userApiApprovalFG.get('treadLicenceseNumber')?.touched)">
                     trade License Number Field is required 
                 </label>
@@ -82,20 +82,18 @@
                         {{this.userApiApprovalFG.get('treadLicense').getError('type')}}
                     </label>
                     <br>  
-                    
+                    <div style="width: fit-content">
+                        <p-button [disabled]="formWorking || userApiApprovalFG.invalid" type="submit" label="{{!formWorking ? 'Update ApI Profile':'Please wait'}}"></p-button>
+                    </div>
                 </div>
+                
             </div>
             
-            <button   (click)="onActiveItemChangeByIndex(3)" style="margin-right: 10px;" class="btn-type-1">Next</button>
-            <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Previous</button>
         </form>
-        <div *ngIf="isSkipApiApproval">
-            <button  (click)="onActiveItemChangeByIndex(3)" style="margin-right: 10px;" class="btn-type-1">Next</button>
-            <button  (click)="onActiveItemChangeByIndex(2)" style="margin-right: 10px;" class="btn-type-1">Previous</button>
-        </div>
-    </div> -->
+       
+    </div>
 </div>
-<div >
+<div *ngIf="apiFeatureEnable">
     <div class="card" >
         <p>Text SMS API</p>
         <div>

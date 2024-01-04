@@ -205,6 +205,7 @@ export class MenueItemsService {
     },
     {
         label: 'API docs',
+        visible:true,
         icon: 'pi pi-code',
         items: [
 
@@ -222,7 +223,28 @@ export class MenueItemsService {
         //RoleName:[Role_Admin],
         visible:this.allowMenueIfTheRoleExists([Role_Admin]),
         items: [
-
+            {
+                label: 'DashBoard',
+                icon: 'pi pi-desktop',
+                items: [
+                    {
+                        label: 'Transaction Dashboard',
+                        icon: 'pi pi-money-bill',
+                        routerLink: ['admin/transaction_dashboard']
+                    },
+                    {
+                        label: 'SMS Dashboard',
+                        icon: 'pi pi-envelope',
+                        routerLink: ['admin/sms_dashboard']
+                    },
+                    {
+                        label: 'Operator Dashboard',
+                        icon: 'pi pi-users',
+                        routerLink: ['admin/operator_dashboard']
+                    },
+                    
+                ]
+            },
             {
                 label: 'Error Code',
                 icon: 'pi pi-dollar',
@@ -234,7 +256,6 @@ export class MenueItemsService {
                         routerLink: ['admin/error_code']
                     },
                     
-
                 ]
             },
             {

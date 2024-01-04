@@ -4,6 +4,9 @@ import { TransationService } from '../services/transation.service';
 import { AccountService } from 'src/app/account/services/account.service';
 import { Observable } from 'rxjs';
 import { MenueItemsService } from 'src/app/layout/menue-items.service';
+import { AuthModel } from 'src/app/account/login/auth-model';
+import { updateArrayByProperty } from 'src/app/shared/helper-functions/functions';
+import { SharedService } from 'src/app/components/shared/shared.service';
 
 @Component({
   selector: 'app-buy-credit',
@@ -16,7 +19,10 @@ export class BuyCreditComponent  implements OnInit{
   constructor(private bkashService:BkashService, 
     private transactionService: TransationService,
     private _accountService:AccountService,
-    private menueItemService:MenueItemsService){}
+    private menueItemService:MenueItemsService,
+    private _sharedService:SharedService
+    
+    ){}
   availableBalance$:Observable<any>;
   ngOnInit(): void {
     this.getAvalibleBalane();
@@ -49,15 +55,29 @@ export class BuyCreditComponent  implements OnInit{
     })
   }
   clickPayButton(){
-    if(this.amountValue<10)
+    if(this.amountValue<20)
+      {
+        this._sharedService.showWarn("Minumum add credit amount is 20 Taka");
         return;
+      }  
     if(this.isSelectedBkash){
       this.addBalanceByBkash();
     }
   }
   getLatestTransaction(){
-    this.transactionService.getLatestTransaction(10).subscribe(res=>{
-      this.Transactions = res.value;
+    this.transactionService.getLatestTransaction(10).subscribe(response=>{
+      this.Transactions = response.value;
+      if(response.value.length>0)
+      {
+          let token: AuthModel = JSON.parse(localStorage.getItem('Token'));
+          if(!token.anyTransactions)
+          {
+            token.anyTransactions = true;
+            localStorage.setItem('Token', JSON.stringify(token));
+            updateArrayByProperty(this.menueItems,'label',['Pricing','Messaging','Phone Book','Reports','API docs'],'visible',JSON.parse(localStorage.getItem('Token'))['anyTransactions'])
+            this.menueItemService.updateMenuItems(this.menueItems);
+          }
+      }
     });
   }
 }

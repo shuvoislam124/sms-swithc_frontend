@@ -3,7 +3,10 @@ import { DeveloperApiKeyService } from './developer-api-key.service';
 import { HttpStatusCode } from '@angular/common/http';
 import { SharedService } from '../../shared/shared.service';
 import { apiUrl } from 'src/main';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DeveloperApiService } from './developer-api.service';
+import { MenueItemsService } from 'src/app/layout/menue-items.service';
+import { updateArrayByProperty } from 'src/app/shared/helper-functions/functions';
 interface UploadEvent {
   originalEvent: Event;
   files: File[];
@@ -41,7 +44,10 @@ export class DevelopersApiComponent implements OnInit {
   }
   constructor(
     public keyService:DeveloperApiKeyService,
-    private _sharedService:SharedService
+    private _sharedService:SharedService,
+    private _apiService:DeveloperApiService,
+    private _fb:FormBuilder,
+    
     )
   {}
   apiAddress= apiUrl;
@@ -49,8 +55,11 @@ export class DevelopersApiComponent implements OnInit {
   products!:any[];
   apiFeatureEnable;
   errors!:any[];
+  formWorking = false;
   keyGenerating = false;
+  
   ngOnInit(): void {
+    
     this.apiFeatureEnable  = JSON.parse(localStorage.getItem('Token'))['apiFeature']
     this.products = [
       {perameterName:'apiKey', meaning:'API Key', description:'Your API Key ()'},
@@ -59,6 +68,17 @@ export class DevelopersApiComponent implements OnInit {
       {perameterName:'textBody', meaning:'SMS body', description:'N.B: Please use url encoding to send some special characters like &, $, @ etc'},
       {perameterName:'label', meaning:'transactional/promotional', description:'use transactional label for transactional sms'},
     ];
+    this.userApiApprovalFG = this._fb.group({
+      companyName:['',Validators.required],
+      companyEmail:['',Validators.required],
+      companyContactPersonName:['',Validators.required],
+      companyContactPersonPhoneNumber:['',Validators.required],
+      companyContactPhoneNumber:['', Validators.required],
+      companyWebSiteUrl:['',Validators.required],
+      applicationUrl:['',Validators.required],
+      treadLicenceseNumber:['',Validators.required],
+      treadLicense:[null,Validators.required],
+    })
     this.errors=[
       {code:'5201 ', meaning:'API not valid.'},
       {code:'5202', meaning:'API not Active.'},
@@ -69,16 +89,32 @@ export class DevelopersApiComponent implements OnInit {
       {code:'5207', meaning:'Insuficient Balance of your seller (The person opned your account).'},
       {code:'5208', meaning:'Account Not Active.'},
       {code:'5209', meaning:'Account Expired.'},
-      
     ];
+
     this.GetKey();
     
   }
+  onSubmit(){
+    // console.log(this.userApiApprovalFG.value);
+    this._apiService.updateAPIProfile(this.userApiApprovalFG.value).subscribe((response)=>{
+      if(response.statusCode == 200)
+        {
+          const token = JSON.parse(localStorage.getItem('Token'));
+          token.apiFeature = true;
+          localStorage.setItem('Token',JSON.stringify(token));
+          this.apiFeatureEnable = true;
+          
+        }
+        
+    });
+  }
+ 
   GetKey()
   {
     this.keyService.GetCurrentUserApiKey().subscribe((response:any)=>{
       if(response.statusCode = HttpStatusCode.Accepted){
         this.apiKey = response.value;
+        
       }
     })
   }
@@ -90,7 +126,6 @@ export class DevelopersApiComponent implements OnInit {
   OngenerateClick(){
     this.keyService.showModal = true;
   }
-
   GenerateButtonClicked(){
     this.keyGenerating = true;
     this.keyService.GenerateKey().subscribe((response:any)=>{

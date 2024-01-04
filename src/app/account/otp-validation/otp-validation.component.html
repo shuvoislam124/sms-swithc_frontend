@@ -1,0 +1,53 @@
+<p-toast></p-toast>
+<p-dialog header="Login" [(visible)]="navigateToLoginModalShow" [modal]="true" [style]="{ width: 'fit-content'}" [draggable]="false" [resizable]="false">
+    <div>
+        <p>Your account has created successfully. Want to Login your account?</p>
+        <div style="display: flex; justify-content: space-between; width:80%;">
+            <button (click)="navigateToLogin()" class="btn-type-1">Login to Dashboard</button>
+        </div>
+        <!-- <button pButton type="button"  label="Yes"></button>
+        <button pButton type="button" (click)="cancel()" label="No"></button> -->
+    </div>
+</p-dialog>
+<div class="h-screen flex w-full surface-ground">
+    <form [formGroup]="form" (ngSubmit)="OnSubmit()" class="flex flex-1 flex-column surface-ground align-items-center justify-content-center">
+        <div class="w-11 sm:w-30rem">
+            <div class="flex flex-column">
+                <div style="height:56px; width:56px"
+                    class="bg-primary-50 border-circle flex align-items-center justify-content-center">
+                    <i class="pi pi-users text-primary text-4xl"></i>
+                </div>
+                <div class="mt-4">
+                    <span class="block text-700 mt-2">Please confirm your account by the OTP which was sent to your mobile number.</span>
+                </div>
+            </div>
+            <div class="flex flex-column gap-3 mt-6">
+                
+                
+                <!-- <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                    <input type="text" pInputText placeholder="Email">
+                </div> -->
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+                    <input type="tel" formControlName="otp"   pInputText  appNumericOnly placeholder="OTP"
+                    [ngClass]="(this.form.get('otp')?.hasError('required') && (this.form.get('password')?.touched)) ? 'ng-invalid ng-dirty':''"
+                    >
+                    <!-- <p-password id="password" placeholder="Password" formControlName="password" styleClass="w-full"  [toggleMask]="true" [feedback]="true"></p-password> -->
+                </div>
+                
+                <div>
+                    <button [disabled]="inProgress ||(!form.valid)"  label="{{inProgress? 'Please Wait':'Confirm Your Account'}}" type="submit" pButton pRipple class="w-full" label="Register"></button>
+                </div>
+                
+            </div>
+        </div>
+    </form>
+    <div [style.background]="'url(assets/layout/images/pages/accessDenied-bg.jpg)'"
+        class="hidden lg:flex flex-1 align-items-center justify-content-center bg-cover">
+        <img height="120px" src="assets/mdl.svg" alt="">
+        
+    </div>
+</div>
+
+<app-config [minimal]="true"></app-config>

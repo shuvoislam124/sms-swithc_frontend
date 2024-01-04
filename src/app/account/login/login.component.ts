@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit{
           this._sharedService.showSuccess('Login successful');
           let token: AuthModel = response.value;
           localStorage.setItem('Token', JSON.stringify(token));
-          updateArrayByProperty(this.menueItems,'label',['Pricing','Messaging','Phone Book','Reports'],'visible',JSON.parse(localStorage.getItem('Token'))['anyTransactions'])
+          updateArrayByProperty(this.menueItems,'label',['Pricing','Messaging','Phone Book','Reports','API docs'],'visible',JSON.parse(localStorage.getItem('Token'))['anyTransactions'])
           this.menueItemService.updateMenuItems(this.menueItems);
           this.router.navigate([this.returnUrl]);
         } else

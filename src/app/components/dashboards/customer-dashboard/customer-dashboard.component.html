@@ -195,6 +195,11 @@
                         </th>
                         <th class="w-5rem">Date</th>
                     </tr>
+                    <tr *ngIf="transactions.length==0">
+                        <td colspan="5">
+                            <p class="text-center">No Item to Show</p>
+                        </td>
+                    </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-i="rowIndex" let-transaction>
                     <tr>

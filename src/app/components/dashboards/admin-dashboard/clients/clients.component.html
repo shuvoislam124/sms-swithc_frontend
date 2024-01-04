@@ -2,7 +2,6 @@
     
     <div class="card">
         <p-table #dt1
-        
         [lazy]="true"
         (onLazyLoad)="GetAll($event)"
         [value]="clients" [tableStyle]="{'min-width': '60rem'}"
@@ -77,8 +76,7 @@
                     <td><i class="pi" [ngClass]="{ 'text-green-500 pi-check-circle': client?.status, 'text-red-500 pi-times-circle': !client.status }"></i></td>
                     <td>{{client.expirationDate}}</td>
                     <td><i class="pi" [ngClass]="{ 'text-green-500 pi-check-circle': client?.apiKey?.status, 'text-red-500 pi-times-circle': !client?.apiKey?.status }"></i></td>
-                    <td>
-                        <!-- <p-splitButton label="Action" [model]="actionButtonMenueItems"  styleClass="p-button-raised p-button-primary mr-2 mb-2"></p-splitButton> -->
+                    <td>                     
                         <a [routerLink]="['/admin/client/',client.userId]" class="text-cyan-800 "><i class="pi pi-arrow-circle-right text-2xl"></i></a>
                     </td>
                 </tr>
