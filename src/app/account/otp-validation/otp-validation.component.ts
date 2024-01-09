@@ -101,6 +101,7 @@ export class OtpValidationComponent  implements OnInit{
         else{
           this.inProgress=false;
           this._sharedService.HandleError(res);
+
         }
       }
       ,
@@ -108,5 +109,53 @@ export class OtpValidationComponent  implements OnInit{
         this._sharedService.HandleError(error);
       })
 
+  }
+  resending = false;
+  ResendOptForRegestration(){
+    if(!this.resending){
+      this.resending=true;
+    const model:VerifyOtpDto = JSON.parse(localStorage.getItem('otpDto'));
+    this._accountService.ResendOtpForRegestration(model).subscribe((res:any)=>{
+      if(res.statusCode==200)
+      {
+        model.expirationTime = res.expirationTime;
+        localStorage.setItem('otpDto',JSON.stringify(model));
+        this.resending=false;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });
+        this.counter =  this.getRemainingTime();
+        console.log(this.counter);
+        if(this.counter<=0){
+          this.showCount= false;
+          this.resend=true;
+        }else{
+          this.showCount = true;
+        }
+        
+      const sub= this.makeObservable(this.counter).subscribe((value)=>{
+            if(value>0){
+              this.count = value;
+              console.log(value);
+              
+            }
+            else{
+              this.resend=true;
+              this.showCount= false;
+              sub.unsubscribe();
+
+            }
+        })
+      }
+      else if(res.statusCode==204){
+        this.messageService.add({severity: 'war', summary: 'Success', detail: res.message});
+        this.resending=false;
+      }
+      else{
+        this.resending=false;
+      }
+    },(error)=>{
+      this.resending=false;
+      this._sharedService.HandleError(error);
+    })
+    }
   }
 }

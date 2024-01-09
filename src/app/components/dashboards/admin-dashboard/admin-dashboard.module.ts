@@ -20,6 +20,9 @@ import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
 import { ChartModule } from 'primeng/chart';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { TimelineModule } from 'primeng/timeline';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { CardModule } from 'primeng/card';
 @NgModule({
   declarations: [
     AdminDashboardComponent,
@@ -47,7 +50,9 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     RippleModule,
     ChartModule,
     SelectButtonModule,    
-  
+    TimelineModule,
+    OverlayPanelModule,
+    CardModule,
   ]
 })
 export class AdminDashboardModule { }

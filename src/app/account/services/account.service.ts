@@ -50,4 +50,7 @@ export class AccountService {
   getAllTimeMessageProcessing(){
     return this._httpClient.get<any>(apiUrl+this.controller+'/total-recipient-message-processing');
   }
+  ResendOtpForRegestration(data:any){
+    return this._httpClient.post(apiUrl+this.controller+'/resend_regestration_otp',data);
+  }
 }
