@@ -9,7 +9,8 @@ import { RegistrationModel } from '../models/RegistrationModel';
   providedIn: 'root'
 })
 export class AccountService {
-  registrationUrl: string = apiUrl + 'Accounts/registration';
+  registrationUrl: string = apiUrl + 'Accounts/registration_by_portal';
+  registrationConfirmUrl:string = apiUrl+'Accounts/registration_confirm';
   ifEmailExistsUrl: string = apiUrl + 'Accounts/ifuseremailalreadyexists';
   IfPhoneNumberExistUrl:string = apiUrl+'Accounts/ifphonenumberalreadyexists';
   getAllUserUrl: string = apiUrl + 'Accounts/getall';
@@ -29,10 +30,13 @@ export class AccountService {
       model.id=Id;
       return this._httpClient.post<any>(this.IfPhoneNumberExistUrl,model);
     }
-
+    
   }
   RegisterUser(data:any){
     return this._httpClient.post<any>(this.registrationUrl, data);
+  }
+  RegisterationConfirmByOtp(data:any){
+    return this._httpClient.post<any>(this.registrationConfirmUrl, data);
   }
   getAvailableBalance(){
     return this._httpClient.get<any>(apiUrl+this.controller+'/available_balance');

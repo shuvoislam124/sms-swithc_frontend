@@ -17,7 +17,7 @@
             <div class="flex flex-column gap-3 mt-6">
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
-                    <input type="tel" formControlName="phoneNumber"  type="text" pInputText placeholder="Phone Number"
+                    <input type="tel" formControlName="phoneNumber"  type="text" pInputText appNumericOnly placeholder="Phone Number"
                     [ngClass]="(this.form.get('phoneNumber')?.hasError('required') && (this.form.get('phoneNumber')?.touched))? 'ng-invalid ng-dirty':''"
                     >
                     
